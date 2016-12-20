@@ -123,6 +123,7 @@ public final class EndpointController {
 		cloudletServer.setIp(cloudletIp);
 		discoveryServiceCloudlet();
         shutdownRediscoveryCloudletMulticast();
+        MposFramework.getInstance().getDecisionController().setServerUrl(cloudletIp);
 	}
 
 	private void discoveryServiceCloudlet() {

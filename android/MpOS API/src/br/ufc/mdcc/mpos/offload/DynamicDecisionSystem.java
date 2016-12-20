@@ -49,9 +49,12 @@ public class DynamicDecisionSystem extends TimerTask {
 
                 Log.i(clsName, "Decision Maker -> Ping max: " + network.getPingMaxTcp() + ", med: " + network.getPingMedTcp() + ", min: " + network.getPingMinTcp());
                 MposFramework.getInstance().getEndpointController().setRemoteAdvantageExecution(network.getPingMedTcp() < PING_TOLERANCE);
+                Log.i(clsName, "Decision Maker -> Bandwidth up: "+network.getBandwidthUpload()+", down: "+network.getBandwidthDownload());
+                MposFramework.getInstance().getDecisionController().setThroughputRate(network.getBandwidthUpload(), network.getBandwidthDownload());
             } else {
                 setServer(null);
                 MposFramework.getInstance().getEndpointController().setRemoteAdvantageExecution(false);
+                MposFramework.getInstance().getDecisionController().setThroughputRate("0", "0");
                 Log.e(clsName, "Any problem in ping test!");
             }
         }

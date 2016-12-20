@@ -38,16 +38,8 @@ import br.ufc.mdcc.mpos.util.Util;
  * @author Philipp B. Costa
  */
 public final class ProfileNetworkFull extends ProfileNetworkTask {
-	private byte data[] = new byte[32 * 1024];
-
-	private Network network;
-	private boolean bandwidthDone = false;
-
 	public ProfileNetworkFull(TaskResult<Network> result, ServerContent server) throws MissedEventException {
 		super(server, result, ProfileNetworkFull.class, "ProfileFull Started on endpoint: " + server.getIp());
-
-		// randomize os dados que serão enviados
-		new Random().nextBytes(data);
 	}
 	/**
      * Feedback code:
@@ -173,89 +165,5 @@ public final class ProfileNetworkFull extends ProfileNetworkTask {
 
 		mutex.acquire();
 		client.close();
-	}
-
-	private boolean bandwidthCalculation() throws IOException, MissedEventException, InterruptedException {
-		final Semaphore mutex = new Semaphore(0);
-		
-		//begin download
-		publishProgress(55);
-		
-		ClientAbstract client = FactoryClient.getInstance(Protocol.TCP_EVENT);
-		client.setReceiveDataEvent(new ReceiveDataEvent() {
-			private long countBytes = 0L;
-
-			private byte endDown[] = "end_down".getBytes();
-			private byte endSession[] = "end_session".getBytes();
-
-			@Override
-			public void receive(byte[] data, int offset, int read) {
-				countBytes += (long) read;
-
-				if (Util.containsArrays(data, endDown)) {
-					// System.out.println("Bytes: "+countBytes);
-					// bytes * 8bits / 7s * 1E+6 = X Mbits
-					double bandwidth = ((double) (countBytes * 8L) / (double) (7.0 * 1E+6));
-					network.setBandwidthDownload(String.valueOf(bandwidth));
-					countBytes = 0L;
-					mutex.release();
-				} else if (Util.containsArrays(data, endSession)) {
-					bandwidthDone = true;
-					String dataBlock = new String(data, offset, read);
-					String res[] = dataBlock.split(":");
-					network.setBandwidthUpload(res[1]);
-
-					mutex.release();
-				}
-			}
-		});
-
-		// timer for finish!
-		Timer timeout = new Timer("Timeout Bandwidth");
-		timeout.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				if (!bandwidthDone) {
-					// para garantir que não vai travar nenhum semaphoro!
-					mutex.release();
-					mutex.release();
-					Log.i(clsName, "Bandwidth Timeout...");
-				}
-			}
-		}, 120000);// 120s de timeout
-
-		Log.i(clsName, "bandwidth (download)");
-		client.connect(server.getIp(), server.getBandwidthPort());
-		client.send("down".getBytes());
-		
-		//wait finish the down...
-		mutex.acquire();
-		
-		//begin upload
-		publishProgress(75);
-
-		if (halted) {
-			timeout.cancel();
-			return false;
-		}
-
-		Log.i(clsName, "bandwidth (upload)");
-		client.send("up".getBytes());
-
-		// faz upload! - 11s
-		long timeExit = System.currentTimeMillis() + 11000;
-		while (System.currentTimeMillis() < timeExit) {
-			client.send(data);
-		}
-		client.send("end_up".getBytes());
-
-		Log.i(clsName, "bandwidth (ended upload)");
-		mutex.acquire();
-		client.close();
-
-		// cancela o timer
-		timeout.cancel();
-
-		return bandwidthDone;
 	}
 }

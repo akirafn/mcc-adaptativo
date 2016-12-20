@@ -42,12 +42,19 @@ public final class ProfileNetworkLight extends ProfileNetworkTask {
      */
 	@Override
 	protected Network doInBackground(Void... params) {
-		Network network = new Network();
+		network = new Network();
 
 		try {
+			Log.i(clsName, "ping tcp");
 		    long[] pings = pingService(Protocol.TCP_EVENT, 7);
 			network.setResultPingTcp(pings);
 			
+			Log.i(clsName, "bandwidth calculation");
+			boolean finished = bandwidthCalculation();
+			if(!finished){
+				return null;
+			}
+				
 			Log.d(clsName, "ProfileLight Finished");
 
 			return network;

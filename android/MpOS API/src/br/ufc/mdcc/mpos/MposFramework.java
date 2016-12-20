@@ -31,6 +31,7 @@ import br.ufc.mdcc.mpos.net.profile.ProfileController;
 import br.ufc.mdcc.mpos.offload.ProxyHandler;
 import br.ufc.mdcc.mpos.offload.Remotable;
 import br.ufc.mdcc.mpos.util.device.DeviceController;
+import br.ufscar.mcc.offload.DecisionController;
 
 /**
  * This class start all service from MpOS framework
@@ -44,6 +45,7 @@ public final class MposFramework {
     private EndpointController endpointController;
     private ProfileController profileController;
     private DeviceController deviceController;
+    private DecisionController decisionController;
 
     //start only once...
     private boolean start = false;
@@ -151,7 +153,8 @@ public final class MposFramework {
 
                 profileController = new ProfileController(context, app.profile());
                 endpointController = new EndpointController(context, endpointSecondary, app.decisionMakerActive(), app.discoveryCloudlet());
-
+                decisionController = new DecisionController(context);
+                
                 break;
             }
         }
@@ -167,5 +170,9 @@ public final class MposFramework {
 
     public ProfileController getProfileController() {
         return profileController;
+    }
+    
+    public DecisionController getDecisionController(){
+    	return decisionController;
     }
 }

@@ -43,18 +43,26 @@ public final class ProfileNetworkDefault extends ProfileNetworkTask {
      */
 	@Override
 	protected Network doInBackground(Void... params) {
-		Network network = new Network();
+		network = new Network();
 
 		try {
+			Log.i(clsName, "ping tcp");
 		    long[] pings = pingService(Protocol.TCP_EVENT);
 			network.setResultPingTcp(pings);
 			publishProgress(33);
 
+			Log.i(clsName, "ping udp");
 			pings = pingService(Protocol.UDP_EVENT);
 			network.setResultPingUdp(pings);
 			publishProgress(66);
 
 			network.setLossPacket(lossPacketCalculation(network));
+
+			Log.i(clsName, "bandwidth calculation");
+			boolean finished = bandwidthCalculation();
+			if(!finished){
+				return null;
+			}
 
 			Log.d(clsName, "ProfileDefault Finished");
 

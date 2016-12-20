@@ -11,13 +11,22 @@ public final class R {
     public static final class attr {
     }
     public static final class string {
-        public static int app_name=0x7f020007;
+        public static int app_name=0x7f020010;
+        public static int create_table_localexecution=0x7f020007;
+        public static int create_table_logdecision=0x7f02000d;
         public static int create_table_netprofile=0x7f020001;
+        public static int create_table_remoteexecution=0x7f02000a;
         public static int create_table_user=0x7f020004;
         public static int database_name=0x7f020000;
+        public static int drop_table_localexecution=0x7f020008;
+        public static int drop_table_logdecision=0x7f02000e;
         public static int drop_table_netprofile=0x7f020002;
+        public static int drop_table_remoteexecution=0x7f02000b;
         public static int drop_table_user=0x7f020005;
+        public static int name_table_localexecution=0x7f020009;
+        public static int name_table_logdecision=0x7f02000f;
         public static int name_table_netprofile=0x7f020003;
+        public static int name_table_remoteexecution=0x7f02000c;
         public static int name_table_user=0x7f020006;
     }
     public static final class style {

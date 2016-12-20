@@ -30,7 +30,7 @@ public abstract class Dao {
 	protected SQLiteDatabase database;
 
 	public Dao(Context con) {
-		databaseManager = new DatabaseManager(con);
+		databaseManager = DatabaseManager.getInstance(con);
 	}
 
 	public Dao(SQLiteOpenHelper databaseManager) {

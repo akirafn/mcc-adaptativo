@@ -38,12 +38,17 @@ public final class ProfileController {
     private ProfileNetworkDao profileDao;
     private ProfileNetworkTask taskNetwork;
     private ProfileNetwork profileNetwork;
+    private Network networkProfile = null;
 
     public ProfileController(Context context, ProfileNetwork profile) {
         this.profileNetwork = profile;
         profileDao = new ProfileNetworkDao(context);
 
         Log.i(ProfileController.class.getName(), "MpOS Profile Started!");
+    }
+    
+    public Network getNetworkResult(){
+    	return networkProfile;
     }
 
     public void setTaskResultEvent(TaskResult<Network> taskResultEvent) {
@@ -77,6 +82,7 @@ public final class ProfileController {
                 if (network != null) {
                     // local persistence
                     profileDao.add(network);
+                    networkProfile = network;
                 }
                 interceptedResults.completedTask(network);
             }

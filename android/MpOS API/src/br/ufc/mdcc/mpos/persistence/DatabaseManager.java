@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import br.ufc.mdcc.mpos.R;
 
 /**
@@ -32,12 +33,19 @@ final class DatabaseManager extends SQLiteOpenHelper {
     private Context context;
 
 	private final ArrayList<String> tabelas = new ArrayList<String>(2);
+	private static DatabaseManager dataManager = null;
 
-	public DatabaseManager(Context con) {
+	private DatabaseManager(Context con) {
 		super(con, con.getString(R.string.database_name), null, DATABASE_VERSION);
 		this.context = con;
 
 		loadingTables();
+	}
+	
+	public static DatabaseManager getInstance(Context context){
+		if(dataManager == null)
+			dataManager = new DatabaseManager(context);
+		return dataManager;
 	}
 
 	@Override
@@ -52,6 +60,9 @@ final class DatabaseManager extends SQLiteOpenHelper {
 		if (oldVersion != newVersion) {
 			db.execSQL(context.getString(R.string.drop_table_netprofile));
 			db.execSQL(context.getString(R.string.drop_table_user));
+			db.execSQL(context.getString(R.string.drop_table_localexecution));
+			db.execSQL(context.getString(R.string.drop_table_remoteexecution));
+			db.execSQL(context.getString(R.string.drop_table_logdecision));
 			onCreate(db);
 		}
 	}
@@ -59,5 +70,8 @@ final class DatabaseManager extends SQLiteOpenHelper {
 	private void loadingTables() {
 		tabelas.add(context.getString(R.string.create_table_netprofile));
 		tabelas.add(context.getString(R.string.create_table_user));
+		tabelas.add(context.getString(R.string.create_table_localexecution));
+		tabelas.add(context.getString(R.string.create_table_remoteexecution));
+		tabelas.add(context.getString(R.string.create_table_logdecision));
 	}
 }

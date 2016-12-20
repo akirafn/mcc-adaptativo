@@ -17,6 +17,9 @@ package br.ufc.mdcc.mpos.net.profile;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Semaphore;
 
 import android.os.AsyncTask;
@@ -31,6 +34,7 @@ import br.ufc.mdcc.mpos.net.exceptions.MissedEventException;
 import br.ufc.mdcc.mpos.net.profile.model.Network;
 import br.ufc.mdcc.mpos.net.profile.model.ProfileResult;
 import br.ufc.mdcc.mpos.util.TaskResult;
+import br.ufc.mdcc.mpos.util.Util;
 import br.ufc.mdcc.mpos.util.device.Device;
 
 /**
@@ -47,6 +51,10 @@ public abstract class ProfileNetworkTask extends AsyncTask<Void, Integer, Networ
 	private String startMessage;
 	private TaskResult<Network> taskResult;
 	private long initTime;
+	protected boolean bandwidthDone;
+	protected Network network;
+	protected byte data[];
+
 
 	/**
 	 * @param sendDataToView - Os dados do resultado da tarefa Ã© enviado para activity atraves de uma interface
@@ -62,6 +70,12 @@ public abstract class ProfileNetworkTask extends AsyncTask<Void, Integer, Networ
 		this.taskResult = result;
 		this.server = server;
 		this.startMessage = startMessage;
+		this.bandwidthDone = false;
+		this.network = new Network();
+		this.data = new byte[32 * 1024];
+		
+		// randomize os dados que serão enviados
+		new Random().nextBytes(data);
 	}
 
 	protected void onPreExecute() {
@@ -190,5 +204,89 @@ public abstract class ProfileNetworkTask extends AsyncTask<Void, Integer, Networ
 	// stop profile!
 	public void halt() {
 		halted = true;
+	}
+	
+	protected boolean bandwidthCalculation() throws IOException, MissedEventException, InterruptedException {
+		final Semaphore mutex = new Semaphore(0);
+		
+		//begin download
+		publishProgress(55);
+		
+		ClientAbstract client = FactoryClient.getInstance(Protocol.TCP_EVENT);
+		client.setReceiveDataEvent(new ReceiveDataEvent() {
+			private long countBytes = 0L;
+
+			private byte endDown[] = "end_down".getBytes();
+			private byte endSession[] = "end_session".getBytes();
+
+			@Override
+			public void receive(byte[] data, int offset, int read) {
+				countBytes += (long) read;
+
+				if (Util.containsArrays(data, endDown)) {
+					// System.out.println("Bytes: "+countBytes);
+					// bytes * 8bits / 7s * 1E+6 = X Mbits
+					double bandwidth = ((double) (countBytes * 8L) / (double) (7.0 * 1E+6));
+					network.setBandwidthDownload(String.valueOf(bandwidth));
+					countBytes = 0L;
+					mutex.release();
+				} else if (Util.containsArrays(data, endSession)) {
+					bandwidthDone = true;
+					String dataBlock = new String(data, offset, read);
+					String res[] = dataBlock.split(":");
+					network.setBandwidthUpload(res[1]);
+
+					mutex.release();
+				}
+			}
+		});
+
+		// timer for finish!
+		Timer timeout = new Timer("Timeout Bandwidth");
+		timeout.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				if (!bandwidthDone) {
+					// para garantir que não vai travar nenhum semaphoro!
+					mutex.release();
+					mutex.release();
+					Log.i(clsName, "Bandwidth Timeout...");
+				}
+			}
+		}, 120000);// 120s de timeout
+
+		Log.i(clsName, "bandwidth (download)");
+		client.connect(server.getIp(), server.getBandwidthPort());
+		client.send("down".getBytes());
+		
+		//wait finish the down...
+		mutex.acquire();
+		
+		//begin upload
+		publishProgress(75);
+
+		if (halted) {
+			timeout.cancel();
+			return false;
+		}
+
+		Log.i(clsName, "bandwidth (upload)");
+		client.send("up".getBytes());
+
+		// faz upload! - 11s
+		long timeExit = System.currentTimeMillis() + 11000;
+		while (System.currentTimeMillis() < timeExit) {
+			client.send(data);
+		}
+		client.send("end_up".getBytes());
+
+		Log.i(clsName, "bandwidth (ended upload)");
+		mutex.acquire();
+		client.close();
+
+		// cancela o timer
+		timeout.cancel();
+
+		return bandwidthDone;
 	}
 }

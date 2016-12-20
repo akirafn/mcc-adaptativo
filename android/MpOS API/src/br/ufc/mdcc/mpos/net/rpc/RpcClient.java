@@ -63,15 +63,15 @@ public final class RpcClient {
 		this.server = server;
 	}
 
-	public Object call(Object objOriginal, Method method, Object params[]) throws RpcException, ConnectException {
+	public ResponseRemotable call(Object objOriginal, Method method, Object params[]) throws RpcException, ConnectException {
 		return call(false, objOriginal, method.getName(), params);
 	}
 
-	public Object call(boolean manualSerialization, Object objOriginal, String methodName, Object params[]) throws RpcException, ConnectException {
+	public ResponseRemotable call(boolean manualSerialization, Object objOriginal, String methodName, Object params[]) throws RpcException, ConnectException {
 		return call(false, manualSerialization, objOriginal, methodName, params);
 	}
 
-	public Object call(boolean needProfile, boolean manualSerialization, Object objOriginal, String methodName, Object params[]) throws RpcException, ConnectException {
+	public ResponseRemotable call(boolean needProfile, boolean manualSerialization, Object objOriginal, String methodName, Object params[]) throws RpcException, ConnectException {
 		if (server == null) {
 			throw new ConnectException("Need to setup any server for use the RPC Client");
 		}
@@ -86,7 +86,8 @@ public final class RpcClient {
 
 			if (response.code == Code.OK) {
 				close(client);// reduce server wait client finish!
-				return response.methodReturn;
+				//return response.methodReturn;
+				return response;
 			} else if (response.code == Code.METHOD_THROW_ERROR) {
 				close(client);
 				throw new RpcException("[Server]: Remote method thrown some errors\n" + response.except);
@@ -113,7 +114,7 @@ public final class RpcClient {
 		if (manualSerialization) {
 			dataFlag[0] = debug ? Code.DATASTREAMDEBUG : Code.DATASTREAM;
 			os.write(dataFlag);
-
+			
 			DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(os, BUFFER_SIZE));
 			outputStream = dos;
 
@@ -121,6 +122,7 @@ public final class RpcClient {
 			dos.writeUTF(methodName);
 			((RpcSerializable) objOriginal).writeMethodParams(dos, methodName, params);
 			dos.flush();
+			
 		} else {
 			dataFlag[0] = debug ? Code.OBJECTSTREAMDEBUG : Code.OBJECTSTREAM;
 			os.write(dataFlag);
@@ -170,6 +172,8 @@ public final class RpcClient {
 				profile.setUploadSize(dis.readInt());
 				profile.setUploadTime(dis.readLong());
 				profile.setExecutionCpuTime(dis.readLong());
+				response.executionTime = profile.getExecutionCpuTime();
+
 				long initDownloadTime = System.currentTimeMillis();
 				response.methodReturn = ((RpcSerializable) objOriginal).readMethodReturn(dis, methodName);
 				profile.setDonwloadTime(System.currentTimeMillis() - initDownloadTime);
@@ -188,6 +192,7 @@ public final class RpcClient {
 			profile.setUploadSize(ois.readInt());
 			profile.setUploadTime(ois.readLong());
 			profile.setExecutionCpuTime(ois.readLong());
+			response.executionTime = profile.getExecutionCpuTime();
 
 			long initDownloadTime = System.currentTimeMillis();
 			response.methodReturn = ois.readObject();
@@ -212,9 +217,11 @@ public final class RpcClient {
 	}
 	
 	//only internal use!
-	private final class ResponseRemotable {
-		int code;
-		Object methodReturn;
-		String except;
-	}
+	//private final class ResponseRemotable {
+	//	int code;
+	//	Object methodReturn;
+	//	String except;
+	//}
+	
+	//only internal use!
 }

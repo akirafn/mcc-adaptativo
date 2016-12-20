@@ -1,1 +1,423 @@
-﻿
+﻿INFO : 2016-11-23 19:37:58 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-23 19:37:58 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-23 19:37:58 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-23 19:37:58 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-23 19:37:58 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-23 19:37:58 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-23 19:37:58 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-23 19:37:58 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-23 19:37:58 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-23 19:41:52 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-23 19:41:53 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-23 19:41:53 >> DeployAppTcpServer:55 - Starting deploy service!
+INFO : 2016-11-23 19:41:53 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-23 19:41:53 >> DeployAppTcpServer:102 - Service: benchimage, deployed on port: 36836
+INFO : 2016-11-23 19:48:33 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-23 19:52:46 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-23 19:53:17 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-23 19:53:17 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-23 19:53:17 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-23 19:53:17 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-23 19:53:17 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-23 19:53:17 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-23 19:53:17 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-23 19:53:17 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-23 19:53:17 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-23 19:53:17 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-23 19:53:20 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-23 19:55:07 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-23 19:55:08 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-23 20:00:37 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-23 20:13:14 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-23 20:18:04 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-23 20:18:04 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-23 20:24:50 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-23 20:24:51 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-24 12:15:11 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-24 12:15:11 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-24 12:15:11 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-24 12:15:11 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-24 12:15:11 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-24 12:15:11 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-24 12:15:11 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-24 12:15:11 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-24 12:15:11 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-24 12:15:11 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-24 12:15:11 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-24 20:28:03 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-24 20:28:03 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-24 20:28:03 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-24 20:28:03 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-24 20:28:03 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-24 20:28:03 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-24 20:28:03 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-24 20:28:03 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-24 20:28:03 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-24 20:28:03 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-24 20:28:03 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-24 20:28:17 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-24 20:28:17 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-24 20:28:17 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-24 20:28:17 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-24 20:28:17 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-24 20:28:17 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-24 20:28:17 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-24 20:28:17 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-24 20:28:17 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-24 20:28:17 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-24 21:00:26 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-24 21:00:26 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-24 21:00:26 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-24 21:00:26 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-24 21:00:26 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-24 21:00:26 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-24 21:00:26 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-24 21:00:26 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-24 21:00:26 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-24 21:00:26 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-24 21:00:37 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-24 21:02:11 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-26 01:40:00 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-26 01:40:00 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-26 01:40:00 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-26 01:40:00 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-26 01:40:00 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-26 01:40:00 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-26 01:40:00 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-26 01:40:00 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-26 01:40:00 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-26 01:40:00 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-26 01:41:17 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 01:41:18 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 01:51:44 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 01:51:44 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 01:56:05 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 02:12:58 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 02:15:15 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 02:16:14 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 02:21:14 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 02:22:56 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 02:34:01 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 02:38:59 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 02:38:59 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 02:55:43 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-26 02:55:43 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-26 02:55:43 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-26 02:55:43 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-26 02:55:43 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-26 02:55:43 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-26 02:55:43 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-26 02:55:43 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-26 02:55:43 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-26 02:55:43 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-26 02:55:57 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:00:30 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-26 03:00:30 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-26 03:00:30 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-26 03:00:30 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-26 03:00:30 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-26 03:00:30 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-26 03:00:30 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-26 03:00:30 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-26 03:00:30 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-26 03:00:30 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-26 03:00:45 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:05:01 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-26 03:05:01 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-26 03:05:01 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-26 03:05:01 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-26 03:05:01 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-26 03:05:01 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-26 03:05:01 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-26 03:05:01 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-26 03:05:01 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-26 03:05:01 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-26 03:05:25 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:08:47 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-26 03:08:47 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-26 03:08:47 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-26 03:08:47 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-26 03:08:47 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-26 03:08:47 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-26 03:08:47 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-26 03:08:47 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-26 03:08:47 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-26 03:08:47 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-26 03:09:13 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:14:56 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:21:49 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:25:07 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:26:25 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:29:31 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:32:09 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:32:09 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:36:06 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:40:44 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:40:44 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:42:56 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:44:45 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:49:36 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:49:37 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:59:01 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 03:59:01 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-26 04:03:27 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-28 19:14:29 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-28 19:14:29 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-28 19:14:29 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-28 19:14:29 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-28 19:14:29 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-28 19:14:29 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-28 19:14:29 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-28 19:14:29 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-28 19:14:29 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-28 19:14:29 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-28 19:14:51 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-28 19:20:47 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-28 19:20:47 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-28 20:00:58 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-28 20:00:58 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-28 20:00:58 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-28 20:00:58 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-28 20:00:58 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-28 20:00:58 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-28 20:00:58 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-28 20:00:58 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-28 20:00:58 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-28 20:00:58 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-28 20:01:37 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-28 20:21:24 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-28 20:21:24 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-28 20:21:24 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-28 20:21:24 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-28 20:21:24 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-28 20:21:24 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-28 20:21:24 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-28 20:21:24 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-28 20:21:24 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-28 20:21:24 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-28 20:22:02 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-28 20:22:02 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.130:31000
+INFO : 2016-11-28 20:22:14 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-28 20:22:48 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-28 20:23:23 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-28 20:23:58 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-28 20:24:17 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-29 15:06:11 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-29 15:06:11 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-29 15:06:11 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-29 15:06:11 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-29 15:06:11 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-29 15:06:11 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-29 15:06:11 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-29 15:06:11 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-29 15:06:11 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-29 15:06:11 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-29 15:06:53 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-29 15:07:04 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:07:15 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-29 15:07:36 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-29 15:09:19 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-29 15:09:30 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:09:41 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-29 15:09:59 >> BandwidthTcpServer:58 - Any problem with I/O socket
+java.net.SocketException: Connection reset by peer: socket write error
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(Unknown Source)
+	at java.net.SocketOutputStream.write(Unknown Source)
+	at br.ufc.mdcc.mpos.net.profile.BandwidthTcpServer.clientRequest(BandwidthTcpServer.java:71)
+	at br.ufc.mdcc.mpos.net.TcpServer$1.run(TcpServer.java:53)
+INFO : 2016-11-29 15:10:25 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-29 15:10:35 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:25:43 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-29 15:25:43 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-29 15:25:43 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-29 15:25:43 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-29 15:25:43 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-29 15:25:43 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-29 15:25:43 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-29 15:25:43 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-29 15:25:43 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-29 15:25:43 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-29 15:26:23 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-29 15:26:24 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-29 15:26:35 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:26:46 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-29 15:27:10 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:27:21 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-29 15:27:45 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:27:56 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-29 15:28:20 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:28:31 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-29 15:28:55 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:29:06 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-29 15:32:32 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-29 15:32:32 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-29 15:32:32 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-29 15:32:32 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-29 15:32:32 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-29 15:32:32 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-29 15:32:32 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-29 15:32:32 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-29 15:32:32 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-29 15:32:32 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-29 15:33:16 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-29 15:33:27 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:33:39 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-29 15:34:02 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:36:05 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-29 15:36:16 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:36:28 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-29 15:36:51 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:37:03 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-29 15:43:20 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-29 15:43:31 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:43:42 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-29 15:44:06 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:44:17 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-29 15:44:41 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-29 15:44:52 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-29 15:45:16 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:17:32 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-30 11:17:32 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-30 11:17:32 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-30 11:17:32 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-30 11:17:32 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-30 11:17:32 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-30 11:17:32 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-30 11:17:32 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-30 11:17:32 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-30 11:17:32 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-30 11:19:28 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-30 11:19:38 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:19:50 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:20:13 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:20:25 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:20:48 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:21:00 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:21:23 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:21:35 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:21:58 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:22:10 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:22:33 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:22:45 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:23:08 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:23:20 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:23:43 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:23:55 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:24:18 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:24:30 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:24:53 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:25:05 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:25:28 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:25:40 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:26:03 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:26:14 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:26:38 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:26:50 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:27:13 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:27:25 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:27:48 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:28:00 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:28:23 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:28:35 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:28:58 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:29:10 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:29:33 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:29:45 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:30:08 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:30:20 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:30:43 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:30:55 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:31:18 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:31:30 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:31:53 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 11:32:05 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 11:32:28 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:19:17 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-30 12:19:17 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-30 12:19:17 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-30 12:19:17 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-30 12:19:17 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-30 12:19:17 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-30 12:19:17 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-30 12:19:17 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-30 12:19:17 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-30 12:19:17 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-30 12:20:12 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-30 12:20:23 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:20:36 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:20:58 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:21:10 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:21:33 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:21:45 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:22:08 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:22:20 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:22:43 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:22:55 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:23:18 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:24:19 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-30 12:24:30 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:24:41 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:25:05 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:25:16 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:25:40 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:25:52 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:26:15 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:26:26 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:26:50 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:27:01 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:27:25 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:27:36 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:28:00 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:28:11 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:28:25 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-30 12:28:36 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:28:47 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:29:11 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:29:22 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:29:46 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:29:57 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:30:21 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:47:59 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-11-30 12:47:59 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-11-30 12:47:59 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-11-30 12:47:59 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-11-30 12:47:59 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-11-30 12:47:59 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-11-30 12:47:59 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-11-30 12:47:59 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-11-30 12:47:59 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-11-30 12:47:59 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-11-30 12:48:43 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-30 12:48:44 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-30 12:48:44 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-30 12:48:45 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.216:31000
+INFO : 2016-11-30 12:48:55 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:49:07 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:49:30 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:49:42 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:50:05 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:50:17 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:50:40 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:50:52 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-11-30 12:51:15 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-11-30 12:51:27 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-12-09 16:10:39 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2016-12-09 16:10:39 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2016-12-09 16:10:39 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2016-12-09 16:10:39 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2016-12-09 16:10:39 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2016-12-09 16:10:39 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2016-12-09 16:10:39 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2016-12-09 16:10:39 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2016-12-09 16:10:39 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2016-12-09 16:10:39 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2016-12-09 16:11:15 >> DiscoveryMulticastService:62 - Receive request from: /200.18.98.157:31000
+INFO : 2016-12-09 16:11:26 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-12-09 16:11:38 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-12-09 16:12:01 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-12-09 16:12:13 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-12-09 16:12:36 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-12-09 16:12:48 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2016-12-09 16:13:11 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2016-12-09 16:13:23 >> BandwidthTcpServer:99 - >> Terminou operacao de upload

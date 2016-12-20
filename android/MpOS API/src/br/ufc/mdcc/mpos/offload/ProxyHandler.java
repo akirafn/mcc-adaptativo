@@ -24,13 +24,14 @@ import java.util.Map;
 
 import android.util.Log;
 import br.ufc.mdcc.mpos.MposFramework;
-import br.ufc.mdcc.mpos.net.endpoint.EndpointType;
 import br.ufc.mdcc.mpos.net.endpoint.ServerContent;
+import br.ufc.mdcc.mpos.net.rpc.ResponseRemotable;
 import br.ufc.mdcc.mpos.net.rpc.RpcClient;
 import br.ufc.mdcc.mpos.net.rpc.model.RpcProfile;
 import br.ufc.mdcc.mpos.net.rpc.util.RpcException;
 import br.ufc.mdcc.mpos.net.rpc.util.RpcSerializable;
-import br.ufc.mdcc.mpos.offload.Remotable.Offload;
+import br.ufscar.mcc.offload.DecisionController;
+import br.ufscar.mcc.offload.DecisionFlag;
 
 /**
  * Proxy Handler, decides execution with is local or remote using rpc!
@@ -63,77 +64,77 @@ public final class ProxyHandler implements InvocationHandler {
 	}
 
 	@Override
-	public Object invoke(Object original, Method method, Object[] params) throws Throwable {
+	public Object invoke(Object original, Method method, Object[] params) throws Throwable{
 		Remotable remotable = methodCache.get(generateKeyMethod(method));
-
-		if (remotable != null) {
+		DecisionFlag decision = DecisionFlag.NoDecision;
+		Object returnObject = null;
+		
+		if(remotable != null)
+		{
+			DecisionController decisionController = MposFramework.getInstance().getDecisionController();
 			ServerContent server = MposFramework.getInstance().getEndpointController().selectPriorityServer(remotable.cloudletPrority());
-			if (remotable.value() == Offload.STATIC) {
-				if (server != null) {
-					try {
-						return invokeRemotable(server, remotable.status(), method, params);
-					} catch (ConnectException e) {
-						Log.w(clsName, e);
-						MposFramework.getInstance().getEndpointController().rediscoveryServices(server);
-					} catch (RpcException e) {
-						Log.w(clsName, e);
+			
+			Log.i(clsName, "Realizar chamada de tomada de decisão auto-adaptativa.");
+			
+			if(server != null){
+				try{
+					decision = decisionController.makeDecision(method, params);
+					if(decision == DecisionFlag.GoOffload || decision == DecisionFlag.ForcedOffload){
+						returnObject = invokeRemotable(server, decision == DecisionFlag.ForcedOffload, method, params);
 					}
 				}
-			} else {
-				try {
-					if (server != null) {
-						MposFramework.getInstance().getEndpointController().updateDynamicDecisionSystemEndpoint(server);
-						if (MposFramework.getInstance().getEndpointController().isRemoteAdvantage()) {
-							return invokeRemotable(server, remotable.status(), method, params);
-						}
-					}
-				} catch (ConnectException e) {
-					Log.w(clsName, e);
+				catch(ConnectException ce){
+					Log.w(clsName, ce);
 					MposFramework.getInstance().getEndpointController().rediscoveryServices(server);
-
-					if (server.getType() == EndpointType.CLOUDLET) {
-						try {
-							server = MposFramework.getInstance().getEndpointController().checkSecondaryServer();
-							if (server != null) {
-								return invokeRemotable(server, remotable.status(), method, params);
-							}
-						} catch (ConnectException eIntern) {
-							Log.w(clsName, eIntern);
-							MposFramework.getInstance().getEndpointController().rediscoveryServices(server);
-						} catch (RpcException eIntern) {
-							Log.w(clsName, eIntern);
-						}
-					}
-				} catch (RpcException e) {
-					Log.w(clsName, e);
+					returnObject = null;
+				}
+				catch(RpcException re){
+					Log.w(clsName, re);
+					returnObject = null;
+				}
+				catch(Exception ex)
+				{
+					Log.w(clsName, ex);
+					returnObject = null;
 				}
 			}
-
+			
 			//not remotable avaliable and need debug, get cpu time
-			if (remotable.status()) {
+			//forced local execution. needs to write local execution profile
+			if (decision == DecisionFlag.ForcedOffload || decision == DecisionFlag.ForcedLocal) {
 				long initCpu = System.currentTimeMillis();
-				Object object = method.invoke(objOriginal, params);
-				MposFramework.getInstance().getEndpointController().rpcProfile.setExecutionCpuTimeLocal(System.currentTimeMillis() - initCpu);
-				Log.i(clsName, MposFramework.getInstance().getEndpointController().rpcProfile.toString());
-				return object;
+				returnObject = method.invoke(objOriginal, params);
+				long localExecutionTime = System.currentTimeMillis() - initCpu;
+				
+				MposFramework.getInstance().getEndpointController().rpcProfile.setExecutionCpuTimeLocal(localExecutionTime);
+				Log.i(clsName, MposFramework.getInstance().getEndpointController().rpcProfile.toString());										
+
+				if(decision == DecisionFlag.ForcedLocal){
+					decisionController.setLocalExecutionProfile(method, params, returnObject, localExecutionTime);
+					Log.i(clsName, "Gravar dados da execução local!");									
+				}
 			}
 		}
-
-		return method.invoke(objOriginal, params);
+		
+		if(returnObject == null)
+			returnObject = method.invoke(objOriginal, params);
+		
+		return returnObject;
 	}
 
 	private Object invokeRemotable(ServerContent server, boolean needProfile, Method method, Object params[]) throws RpcException, ConnectException {
 		rpc.setupServer(server);
-		Object returnMethod = rpc.call(needProfile, manualSerialization, objOriginal, method.getName(), params);
-
+		ResponseRemotable response = rpc.call(needProfile, manualSerialization, objOriginal, method.getName(), params);
+		
 		if (needProfile) {
 			RpcProfile profile = rpc.getProfile();
 			Log.i(clsName, profile.toString());
 			MposFramework.getInstance().getEndpointController().rpcProfile = profile;
+			MposFramework.getInstance().getDecisionController().setRemoteExecutionProfile(method, params, response.executionTime);
 		}
 
-		if (returnMethod != null) {
-			return returnMethod;
+		if (response != null) {
+			return response.methodReturn;
 		} else {
 			throw new RpcException("Method (failed): " + method.getName() + ", return 'null' value from remotable method");
 		}
