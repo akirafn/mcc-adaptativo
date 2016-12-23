@@ -10,16 +10,16 @@
     <string name="drop_table_user">DROP TABLE IF EXISTS user</string>
     <string name="name_table_user">user</string>
     
-    <string name="create_table_localexecution">CREATE TABLE t_localexecution (profileid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodname TEXT, classname TEXT, inputsize INTEGER, outputsize INTEGER, profilehash INTEGER, localprocesstime  INTEGER)</string>
-    <string name="drop_table_localexecution">DROP TABLE IF EXISTS t_localexecution</string>
-    <string name="name_table_localexecution">t_localexecution</string>
+    <string name="create_table_methoddata">CREATE TABLE t_methoddata (methodid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodname TEXT, classname TEXT, methodcount INTEGER DEFAULT 1, methodhash INTEGER)</string>
+    <string name="drop_table_methoddata">DROP TABLE IF EXISTS t_methoddata</string>
+    <string name="name_table_methoddata">t_methoddata</string>
     
-    <string name="create_table_remoteexecution">CREATE TABLE t_remoteexecution (remoteid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, profileid INTEGER, serverurl TEXT, remoteprocesstime INTEGER)</string>
-    <string name="drop_table_remoteexecution">DROP TABLE IF EXISTS t_remoteexecution</string>
-    <string name="name_table_remoteexecution">t_remoteexecution</string>
+    <string name="create_table_executiondata">CREATE TABLE t_executiondata (executionid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodid INTEGER, inputsize INTEGER, outputsize INTEGER, serverurl TEXT, conntype INTEGER, executiondate DATETIME DEFAULT CURRENT_TIMESTAMP, executiontime INTEGER, executiondecision INTEGER)</string>
+    <string name="drop_table_executiondata">DROP TABLE IF EXISTS t_executiondata</string>
+    <string name="name_table_executiondata">t_executiondata</string>
     
-    <string name="create_table_logdecision">CREATE TABLE t_logdecision ( logid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, profileid INTEGER, remoteid INTEGER, profilehash INTEGER, serverurl TEXT, conntype TEXT, executionndate DATETIME DEFAULT CURRENT_TIMESTAMP, executiontime INTEGER, executiondecision INTEGER )</string>
-    <string name="drop_table_logdecision">DROP TABLE IF EXISTS t_logdecision</string>
-    <string name="name_table_logdecision">t_logdecision</string>
+    <string name="create_table_thresholddata">CREATE TABLE t_thresholddata ( thresholdid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodid INTEGER, serverurl TEXT, conntype INTEGER, unfavmin INTEGER, unfavmed INTEGER, unfavmax INTEGER, favmin INTEGER, favmed INTEGER, favmax INTEGER)</string>
+    <string name="drop_table_thresholddata">DROP TABLE IF EXISTS t_thresholddata</string>
+    <string name="name_table_thresholddata">t_thresholddata</string>
     
 </resources>

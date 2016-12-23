@@ -9,21 +9,21 @@ package br.ufc.mdcc.mpos;
 public final class R {
 	public static final class string {
 		public static final int app_name = 0x7f040010;
-		public static final int create_table_localexecution = 0x7f040007;
-		public static final int create_table_logdecision = 0x7f04000d;
+		public static final int create_table_executiondata = 0x7f04000a;
+		public static final int create_table_methoddata = 0x7f040007;
 		public static final int create_table_netprofile = 0x7f040001;
-		public static final int create_table_remoteexecution = 0x7f04000a;
+		public static final int create_table_thresholddata = 0x7f04000d;
 		public static final int create_table_user = 0x7f040004;
 		public static final int database_name = 0x7f040000;
-		public static final int drop_table_localexecution = 0x7f040008;
-		public static final int drop_table_logdecision = 0x7f04000e;
+		public static final int drop_table_executiondata = 0x7f04000b;
+		public static final int drop_table_methoddata = 0x7f040008;
 		public static final int drop_table_netprofile = 0x7f040002;
-		public static final int drop_table_remoteexecution = 0x7f04000b;
+		public static final int drop_table_thresholddata = 0x7f04000e;
 		public static final int drop_table_user = 0x7f040005;
-		public static final int name_table_localexecution = 0x7f040009;
-		public static final int name_table_logdecision = 0x7f04000f;
+		public static final int name_table_executiondata = 0x7f04000c;
+		public static final int name_table_methoddata = 0x7f040009;
 		public static final int name_table_netprofile = 0x7f040003;
-		public static final int name_table_remoteexecution = 0x7f04000c;
+		public static final int name_table_thresholddata = 0x7f04000f;
 		public static final int name_table_user = 0x7f040006;
 	}
 	public static final class style {

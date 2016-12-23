@@ -1,18 +1,17 @@
 package br.ufscar.mcc.history.model;
 
 public enum ConnectionType {
-	CONN_3G("3G"),
-	CONN_WiFi("WIFI"),
-	CONN_LOCAL("Local");
+	CONN_3G(2),
+	CONN_WiFi(1),
+	CONN_LOCAL(0);
 	
-	private final String text;
+	private int value;
 	
-	private ConnectionType(String text){
-		this.text = text;
+	private ConnectionType(int value){
+		this.value = value;
 	}
 	
-	@Override
-	public String toString(){
-		return text;
+	public int getValue(){
+		return value;
 	}
 }
