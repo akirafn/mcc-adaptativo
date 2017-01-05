@@ -1,85 +1,59 @@
 package br.ufscar.mcc.offload;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 
-import android.content.Context;
-import br.ufc.mdcc.mpos.persistence.LogDecisionDao;
-import br.ufscar.mcc.history.model.OffloadShortProfile;
+import br.ufscar.mcc.model.FunctionProfile;
 
 public class Layer01Stimulus {
-	private OffloadShortProfile lastProfile;
-	private HashMap<Integer, OffloadShortProfile> profileMap;
-	private LogDecisionDao logDao;
-	private String serverUrl;
-	private int mapLimit = 15;
-	private final String clsName = Layer03Time.class.getName();
-	
-	public Layer01Stimulus(Context context, String serverUrl){
-		this.serverUrl = serverUrl;
-		this.profileMap = new HashMap<Integer, OffloadShortProfile>();
-		this.lastProfile = null;
-	}
-	
-	public DecisionFlag makeDecision(String methodName, String className, int inputSize) {
-		DecisionFlag decision = DecisionFlag.NoDecision;
+	private HashMap<Integer, FunctionProfile> profileMap;
+	private double supLimit;
+	private double infLimit;
 
-		Integer chave = Integer.valueOf(generateProfileHash(methodName, className, inputSize));
-		OffloadShortProfile shortProfile;
-		
-		if(profileMap.containsKey(chave)){
-			shortProfile = profileMap.get(chave);
-			if(shortProfile.getProfileDecision() > 0.6)
-				decision = DecisionFlag.GoOffload;
-			else if(shortProfile.getProfileDecision() < 0.4)
-				decision = DecisionFlag.GoLocal;
+	public Layer01Stimulus(double limit) {
+		this.profileMap = new HashMap<Integer, FunctionProfile>();
+		this.supLimit = limit;
+		this.infLimit = -1.0 * limit;
+	}
+
+	public DecisionFlag makeDecision(Method method, int inputSize) {
+		DecisionFlag decision = DecisionFlag.NoDecision;
+		FunctionProfile profile;
+		double value;
+
+		Integer chave = Integer.valueOf(generateProfileHash(method.getName(), method.getClass().getName()));
+
+		if (profileMap.containsKey(chave)) {
+			profile = profileMap.get(chave);
+			if(profile.getMethodName().equals(method.getName())){
+				value = (profile.getFactorA() * (double)inputSize) + profile.getFactorB();
+				if (value > supLimit)
+					decision = DecisionFlag.GoOffload;
+				else if (value < infLimit)
+					decision = DecisionFlag.GoLocal;				
+			}
 		}
-		
+
 		return decision;
 	}
-	
-	public int generateProfileHash(String methodName, String className, int inputSize){
+
+	private int generateProfileHash(String methodName, String className) {
 		int prime = 59;
 		int result = 1;
 		result = prime * result + ((className == null) ? 0 : className.hashCode());
-		result = prime * result + inputSize;
 		result = prime * result + ((methodName == null) ? 0 : methodName.hashCode());
-		
+
 		return result;
-	}	
-	
-	public void insertIntoTable(String methodName, String className, int inputSize, boolean offloadDecision){
-		Integer chave = Integer.valueOf(generateProfileHash(methodName, className, inputSize));
-		OffloadShortProfile shortProfile;
-
-		if(profileMap.containsKey(chave)){
-			shortProfile = profileMap.get(chave);
-			shortProfile.countUp();
-		}
-		else if(profileMap.size() <= mapLimit){
-			shortProfile = new OffloadShortProfile();
-			shortProfile.setProfileCount(1);
-			shortProfile.setProfileHash(chave.intValue());
-			if(offloadDecision)
-				shortProfile.setProfileDecision(1.0);
-			else
-				shortProfile.setProfileDecision(0.0);
-			
-			profileMap.put(chave, shortProfile);
-		}
 	}
-	
-	private void adjustTable(){
-		if(profileMap.size() > mapLimit){
-			profileMap.remove(lastProfile);
-			lastProfile = null;
-		}
-		
-		Set profileSet = profileMap.entrySet();
-		Iterator profileIterator = profileSet.iterator();
-		while(profileIterator.hasNext()){
 
+	public void insertIntoTable(Method method, int inputSize, boolean offloadDecision) {
+		Integer chave = Integer.valueOf(generateProfileHash(method.getName(), method.getClass().getName()));
+		FunctionProfile profile = new FunctionProfile();
+
+		if (profileMap.containsKey(chave)) {
+			// TODO
+		} else {
+			profileMap.put(chave, profile);
 		}
 	}
 }

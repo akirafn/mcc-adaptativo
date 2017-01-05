@@ -15,6 +15,8 @@
  *******************************************************************************/
 package br.ufc.mdcc.mpos.offload;
 
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -45,7 +47,7 @@ public final class ProxyHandler implements InvocationHandler {
 
 	private Object objOriginal;
 	private boolean manualSerialization = false;
-
+	
 	private ProxyHandler(Object objProxy, Class<?> interfaceType) {
 		this.objOriginal = objProxy;
 
@@ -68,6 +70,9 @@ public final class ProxyHandler implements InvocationHandler {
 		Remotable remotable = methodCache.get(generateKeyMethod(method));
 		DecisionFlag decision = DecisionFlag.NoDecision;
 		Object returnObject = null;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream oos = new ObjectOutputStream(baos);
+		int paramSize;
 		
 		if(remotable != null)
 		{
@@ -76,11 +81,18 @@ public final class ProxyHandler implements InvocationHandler {
 			
 			Log.i(clsName, "Realizar chamada de tomada de decisão auto-adaptativa.");
 			
+			oos.writeObject(params);
+			oos.flush();
+
+			paramSize = baos.toByteArray().length;
+			
 			if(server != null){
 				try{
-					decision = decisionController.makeDecision(method, params);
+
+					
+					decision = decisionController.makeDecision(method, paramSize);
 					if(decision == DecisionFlag.GoOffload || decision == DecisionFlag.ForcedOffload){
-						returnObject = invokeRemotable(server, decision == DecisionFlag.ForcedOffload, method, params);
+						returnObject = invokeRemotable(server, decision == DecisionFlag.ForcedOffload, method, params, paramSize);
 					}
 				}
 				catch(ConnectException ce){
@@ -101,7 +113,7 @@ public final class ProxyHandler implements InvocationHandler {
 			
 			//not remotable avaliable and need debug, get cpu time
 			//forced local execution. needs to write local execution profile
-			if (decision == DecisionFlag.ForcedOffload || decision == DecisionFlag.ForcedLocal) {
+			if (decision == DecisionFlag.GoLocal || decision == DecisionFlag.ForcedLocal) {
 				long initCpu = System.currentTimeMillis();
 				returnObject = method.invoke(objOriginal, params);
 				long localExecutionTime = System.currentTimeMillis() - initCpu;
@@ -109,10 +121,7 @@ public final class ProxyHandler implements InvocationHandler {
 				MposFramework.getInstance().getEndpointController().rpcProfile.setExecutionCpuTimeLocal(localExecutionTime);
 				Log.i(clsName, MposFramework.getInstance().getEndpointController().rpcProfile.toString());										
 
-				if(decision == DecisionFlag.ForcedLocal){
-					decisionController.setLocalExecutionProfile(method, params, returnObject, localExecutionTime);
-					Log.i(clsName, "Gravar dados da execução local!");									
-				}
+				decisionController.setLocalExecutionProfile(method, paramSize, returnObject, localExecutionTime);
 			}
 		}
 		
@@ -122,7 +131,7 @@ public final class ProxyHandler implements InvocationHandler {
 		return returnObject;
 	}
 
-	private Object invokeRemotable(ServerContent server, boolean needProfile, Method method, Object params[]) throws RpcException, ConnectException {
+	private Object invokeRemotable(ServerContent server, boolean needProfile, Method method, Object params[], int paramSize) throws RpcException, ConnectException {
 		rpc.setupServer(server);
 		ResponseRemotable response = rpc.call(needProfile, manualSerialization, objOriginal, method.getName(), params);
 		
@@ -130,10 +139,11 @@ public final class ProxyHandler implements InvocationHandler {
 			RpcProfile profile = rpc.getProfile();
 			Log.i(clsName, profile.toString());
 			MposFramework.getInstance().getEndpointController().rpcProfile = profile;
-			MposFramework.getInstance().getDecisionController().setRemoteExecutionProfile(method, params, response.executionTime);
 		}
 
 		if (response != null) {
+			MposFramework.getInstance().getDecisionController().setRemoteExecutionProfile(method, paramSize, response.methodReturn, response.executionTime);
+
 			return response.methodReturn;
 		} else {
 			throw new RpcException("Method (failed): " + method.getName() + ", return 'null' value from remotable method");

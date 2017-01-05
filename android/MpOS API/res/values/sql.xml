@@ -14,12 +14,19 @@
     <string name="drop_table_methoddata">DROP TABLE IF EXISTS t_methoddata</string>
     <string name="name_table_methoddata">t_methoddata</string>
     
-    <string name="create_table_executiondata">CREATE TABLE t_executiondata (executionid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodid INTEGER, inputsize INTEGER, outputsize INTEGER, serverurl TEXT, conntype INTEGER, executiondate DATETIME DEFAULT CURRENT_TIMESTAMP, executiontime INTEGER, executiondecision INTEGER)</string>
-    <string name="drop_table_executiondata">DROP TABLE IF EXISTS t_executiondata</string>
-    <string name="name_table_executiondata">t_executiondata</string>
+    <string name="create_table_localexecutiondata">CREATE TABLE t_localexecutiondata (executionid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodid INTEGER, inputsize INTEGER, outputsize INTEGER, serverurl TEXT, conntype INTEGER, executiondate DATETIME DEFAULT CURRENT_TIMESTAMP, executiontime INTEGER, executiondecision INTEGER)</string>
+    <string name="drop_table_localexecutiondata">DROP TABLE IF EXISTS t_localexecutiondata</string>
+    <string name="name_table_localexecutiondata">t_localexecutiondata</string>
     
-    <string name="create_table_thresholddata">CREATE TABLE t_thresholddata ( thresholdid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodid INTEGER, serverurl TEXT, conntype INTEGER, unfavmin INTEGER, unfavmed INTEGER, unfavmax INTEGER, favmin INTEGER, favmed INTEGER, favmax INTEGER)</string>
+    <string name="create_table_remoteexecutiondata">CREATE TABLE t_remoteexecutiondata (executionid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodid INTEGER, inputsize INTEGER, outputsize INTEGER, serverurl TEXT, conntype INTEGER, executiondate DATETIME DEFAULT CURRENT_TIMESTAMP, executiontime INTEGER, executiondecision INTEGER)</string>
+    <string name="drop_table_remoteexecutiondata">DROP TABLE IF EXISTS t_remoteexecutiondata</string>
+    <string name="name_table_remoteexecutiondata">t_remoteexecutiondata</string>
+    
+    <string name="create_table_thresholddata">CREATE TABLE t_thresholddata ( thresholdid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodid INTEGER, serverurl TEXT, conntype INTEGER, unfavmin INTEGER, unfavmax INTEGER, favmin INTEGER, favmax INTEGER)</string>
     <string name="drop_table_thresholddata">DROP TABLE IF EXISTS t_thresholddata</string>
-    <string name="name_table_thresholddata">t_thresholddata</string>
+    <string name="name_table_thresholddata">t_thresholddata</string>    
     
+    <string name="create_table_functiondata">CREATE TABLE t_functiondata (functionid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodid INTEGER, serverurl TEXT, conntype INTEGER, sumx INTEGER, sumy INTEGER, sumxy INTEGER, sumsqrx INTEGER, factora REAL, factorb REAL)</string>
+    <string name="drop_table_functiondata">DROP TABLE IF EXISTS t_functiondata</string>
+    <string name="name_table_functiondata">t_functiondata</string>
 </resources>

@@ -1,113 +1,146 @@
 package br.ufscar.mcc.offload;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.util.Log;
-import br.ufc.mdcc.mpos.persistence.MethodExecutionDao;
-import br.ufscar.mcc.history.model.ConnectionType;
-import br.ufscar.mcc.history.model.MethodExecutionProfile;
+import br.ufc.mdcc.mpos.persistence.ExecutionDao;
+import br.ufc.mdcc.mpos.persistence.FunctionDao;
+import br.ufc.mdcc.mpos.persistence.MethodDao;
+import br.ufscar.mcc.model.ConnectionType;
+import br.ufscar.mcc.model.ExecutionProfile;
+import br.ufscar.mcc.model.FunctionProfile;
+import br.ufscar.mcc.model.MethodProfile;
 
 public class Layer03Time {
-	private String serverUrl;
-	private Context context;
-	private MethodExecutionDao methodDao;
-	private ConnectionType connType;
+	private MethodDao methodDao;
+	private ExecutionDao executionDao;
+	private FunctionDao functionDao;
 	private final String clsName = Layer03Time.class.getName();
 
-	public Layer03Time(Context context, String serverUrl, int delay) {
-		this.serverUrl = serverUrl;
-		this.context = context;
-		this.methodDao = new MethodExecutionDao(context);
-	}
-
-	//----------------------
-	// Getters and Setters
-	//----------------------
-	public void setServerUrl(String serverUrl) {
-		this.serverUrl = serverUrl;
-	}
-
-	public void setConnectionType() {
-		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-
-		if (activeNetwork != null) {
-			if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
-				this.connType = ConnectionType.CONN_WiFi;
-			else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
-				this.connType = ConnectionType.CONN_3G;
-			else
-				this.connType = ConnectionType.CONN_LOCAL;
-		} else {
-			this.connType = ConnectionType.CONN_LOCAL;
-		}
-	}
-	
-	public ConnectionType getConnectionType(){
-		return this.connType;
+	public Layer03Time(Context context, int delay) {
+		this.methodDao = new MethodDao(context);
+		this.executionDao = new ExecutionDao(context);
 	}
 
 	// --------------------------------
 	// Methods for data manipulation
 	// --------------------------------
-	public MethodExecutionProfile getMethodProfileByName(Method method, int inputSize) {
-		MethodExecutionProfile methodProfile;
+	public MethodProfile getMethodProfileByName(Method method) {
+		MethodProfile profile;
 		try {
-			Log.i(clsName, "Consultar metodo " + method.getName() + " com argumento " + String.valueOf(inputSize)
-					+ " e servidor " + serverUrl);
-			methodProfile = methodDao.getMethodProfileByName(method.getName(), method.getClass().getName(), inputSize,
-					serverUrl);
+			profile = methodDao.getMethodProfle(method.getName(), method.getClass().getName());
 		} catch (Exception ex) {
 			Log.e(clsName, ex.getMessage());
-			methodProfile = new MethodExecutionProfile();
+			profile = new MethodProfile();
 		}
-		Log.i(clsName, "Encontrado metodo " + methodProfile.getMethodName() + " com argumento "
-				+ methodProfile.getInputSize() + " e servidor " + methodProfile.getServerUrl());
-		return methodProfile;
+		return profile;
 	}
-	
-	public void setLocalExecutionProfile(Method method, int inputSize, int outputSize, int localTime) {
-		MethodExecutionProfile methodProfile = new MethodExecutionProfile();
-		methodProfile.setMethodName(method.getName());
-		methodProfile.setClassName(method.getClass().getName());
-		methodProfile.setInputSize(inputSize);
-		methodProfile.setOutputSize(outputSize);
-		methodProfile.setLocalTime(localTime);
-		methodProfile.generateProfileHash();
+
+	public void setMethodProfile(Method method, int methodCount) {
+		MethodProfile profile = new MethodProfile();
+		profile.setMethodName(method.getName());
+		profile.setClassName(method.getClass().getName());
+		profile.setMethodCount(methodCount);
 
 		try {
-			methodDao.insertLocalExecution(methodProfile);
+			methodDao.insertMethodProfile(profile);
 		} catch (Exception ex) {
 			Log.e(clsName, ex.getMessage());
 		}
 	}
 
-	public void setRemoteExecutionProfile(int methodId, int remoteTime) {
-		MethodExecutionProfile methodProfile = new MethodExecutionProfile();
-		methodProfile.setProfileId(methodId);
-		methodProfile.setServerUrl(serverUrl);
-		methodProfile.setRemoteTime(remoteTime);
+	public ExecutionProfile getRemoteExecutionProfileByServerConn(Method method, int inputSize, String serverUrl,
+			ConnectionType connType) {
+		ExecutionProfile profile;
+		try {
+			profile = executionDao.getRemoteExecutionByMethodInputLocalConn(method.getName(),
+					method.getClass().getName(), inputSize, serverUrl, connType);
+		} catch (Exception ex) {
+			Log.e(clsName, ex.getMessage());
+			profile = new ExecutionProfile();
+		}
+
+		return profile;
+	}
+
+	public ExecutionProfile getRemoteExecutionProfileByConn(Method method, int inputSize, ConnectionType connType) {
+		ExecutionProfile profile;
+		try {
+			profile = executionDao.getRemoteExecutionByMethodInputConn(method.getName(), method.getClass().getName(),
+					inputSize, connType);
+		} catch (Exception ex) {
+			Log.e(clsName, ex.getMessage());
+			profile = new ExecutionProfile();
+		}
+
+		return profile;
+	}
+
+	public ExecutionProfile getLocalExecutionProfileByInput(Method method, int inputSize) {
+		ExecutionProfile profile;
+		try {
+			profile = executionDao.getLocalExecutionByMethodInput(method.getName(), method.getClass().getName(),
+					inputSize);
+		} catch (Exception ex) {
+			Log.e(clsName, ex.getMessage());
+			profile = new ExecutionProfile();
+		}
+
+		return profile;
+	}
+
+	public void setExecutionProfile(Method method, int inputSize, int outputSize, int executionTime, String serverUrl,
+			ConnectionType connType, DecisionFlag decision) {
+		MethodProfile mtProfile;
+		ExecutionProfile exProfile = new ExecutionProfile();
+
+		exProfile.setInputSize(inputSize);
+		exProfile.setOutputSize(outputSize);
+		exProfile.setServerUrl(serverUrl);
+		exProfile.setConnType(connType);
+		exProfile.setExecutionTime(executionTime);
+		exProfile.setExecutionDecision(decision);
 
 		try {
-			methodDao.insertRemoteExecution(methodProfile);
+			mtProfile = methodDao.getMethodProfle(method.getName(), method.getClass().getName());
+			if (mtProfile.getMethodId() == 0) {
+				mtProfile.setMethodName(method.getName());
+				mtProfile.setClassName(method.getClass().getName());
+				mtProfile.setMethodCount(1);
+				methodDao.insertMethodProfile(mtProfile);
+				Log.i(clsName,
+						"Inserido método " + mtProfile.getMethodName() + " da classe " + mtProfile.getClassName());
+				mtProfile = methodDao.getMethodProfle(method.getName(), method.getClass().getName());
+			}
+			exProfile.setMethodId(mtProfile.getMethodId());
+			Log.i(clsName, "Inserida execucao referente ao metodo " + exProfile.getMethodId());
+
+			executionDao.insertExecutionProfile(exProfile);
 		} catch (Exception ex) {
 			Log.e(clsName, ex.getMessage());
 		}
 	}
-	
-	public void setLogProfile(int methodId, int remoteId){
-		
+
+	public HashMap<Integer, FunctionProfile> getFunctionMap(String serverUrl, ConnectionType connType) {
+		HashMap<Integer, FunctionProfile> mapa;
+
+		try {
+			mapa = functionDao.getFunctionMapByServerConn(serverUrl, connType);
+		} catch (Exception ex) {
+			Log.e(clsName, ex.getMessage());
+			mapa = new HashMap<Integer, FunctionProfile>();
+		}
+
+		return mapa;
 	}
 
-	// --------------------------------
-	// Decision Taking Management
-	// --------------------------------
-	public DecisionFlag makeDecision(String methodName, String className, int inputSize) {
-		DecisionFlag decision = DecisionFlag.NoDecision;
-
-		return decision;
+	public void updateFunctionMap(HashMap<Integer, FunctionProfile> mapa) {
+		try {
+			functionDao.updateFunctionProfileList(mapa);
+		} catch (Exception ex) {
+			Log.e(clsName, ex.getMessage());
+		}
 	}
 }

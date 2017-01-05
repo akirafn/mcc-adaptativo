@@ -11,22 +11,28 @@ public final class R {
     public static final class attr {
     }
     public static final class string {
-        public static int app_name=0x7f020010;
-        public static int create_table_executiondata=0x7f02000a;
+        public static int app_name=0x7f020016;
+        public static int create_table_functiondata=0x7f020013;
+        public static int create_table_localexecutiondata=0x7f02000a;
         public static int create_table_methoddata=0x7f020007;
         public static int create_table_netprofile=0x7f020001;
-        public static int create_table_thresholddata=0x7f02000d;
+        public static int create_table_remoteexecutiondata=0x7f02000d;
+        public static int create_table_thresholddata=0x7f020010;
         public static int create_table_user=0x7f020004;
         public static int database_name=0x7f020000;
-        public static int drop_table_executiondata=0x7f02000b;
+        public static int drop_table_functiondata=0x7f020014;
+        public static int drop_table_localexecutiondata=0x7f02000b;
         public static int drop_table_methoddata=0x7f020008;
         public static int drop_table_netprofile=0x7f020002;
-        public static int drop_table_thresholddata=0x7f02000e;
+        public static int drop_table_remoteexecutiondata=0x7f02000e;
+        public static int drop_table_thresholddata=0x7f020011;
         public static int drop_table_user=0x7f020005;
-        public static int name_table_executiondata=0x7f02000c;
+        public static int name_table_functiondata=0x7f020015;
+        public static int name_table_localexecutiondata=0x7f02000c;
         public static int name_table_methoddata=0x7f020009;
         public static int name_table_netprofile=0x7f020003;
-        public static int name_table_thresholddata=0x7f02000f;
+        public static int name_table_remoteexecutiondata=0x7f02000f;
+        public static int name_table_thresholddata=0x7f020012;
         public static int name_table_user=0x7f020006;
     }
     public static final class style {

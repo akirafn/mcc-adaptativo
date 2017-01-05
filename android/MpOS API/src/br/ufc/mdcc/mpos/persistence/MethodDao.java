@@ -1,12 +1,14 @@
 package br.ufc.mdcc.mpos.persistence;
 
+import java.lang.reflect.Method;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.util.Log;
 import br.ufc.mdcc.mpos.R;
-import br.ufscar.mcc.history.model.MethodProfile;
+import br.ufscar.mcc.model.MethodProfile;
 
 public class MethodDao extends Dao {
 	private String TABLE_NAME;
@@ -29,7 +31,7 @@ public class MethodDao extends Dao {
 		cv.put(L_METHODNAME, profile.getMethodName());
 		cv.put(L_CLASSNAME, profile.getClassName());
 		cv.put(L_METHODHASH, profile.hashCode());
-		
+
 		try {
 			database.insert(TABLE_NAME, null, cv);
 		} catch (SQLException ex) {
@@ -45,7 +47,7 @@ public class MethodDao extends Dao {
 		ContentValues cv = new ContentValues();
 		cv.put(L_METHODCOUNT, methodCount);
 
-		String sql = "methodId = " + methodId;
+		String sql = "METHODID = " + methodId;
 
 		try {
 			database.update(TABLE_NAME, cv, sql, null);
@@ -57,8 +59,8 @@ public class MethodDao extends Dao {
 	}
 
 	public MethodProfile getMethodProfle(String methodName, String className) {
-		String sql = "SELECT METHODID, METHODNAME, CLASSNAME, METHODCOUNT FROM " + TABLE_NAME + " WHERE METHODNAME LIKE '%"
-				+ methodName + "%' AND CLASSNAME LIKE '%" + className + "%'";
+		String sql = "SELECT METHODID, METHODNAME, CLASSNAME, METHODCOUNT FROM " + TABLE_NAME
+				+ " WHERE METHODNAME LIKE '%" + methodName + "%' AND CLASSNAME LIKE '%" + className + "%'";
 
 		return getResult(sql);
 	}
@@ -66,6 +68,7 @@ public class MethodDao extends Dao {
 	private MethodProfile getResult(String sql) {
 		openDatabase();
 		Cursor cursor = database.rawQuery(sql, null);
+		Log.i(clsname, "Consulta '" + sql + "' trouxe " + cursor.getCount() + " resultados");
 
 		MethodProfile profile = new MethodProfile();
 
@@ -80,6 +83,8 @@ public class MethodDao extends Dao {
 			profile.setMethodName(cursor.getString(idx_methodname));
 			profile.setClassName(cursor.getString(idx_classname));
 			profile.setMethodCount(cursor.getInt(idx_methodcount));
+			
+			Log.i(clsname, "Achado metodo "+profile.getMethodName());
 		}
 
 		cursor.close();

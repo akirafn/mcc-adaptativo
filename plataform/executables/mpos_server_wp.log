@@ -12,3 +12,7 @@ INFO: quarta-feira, 30 de novembro de 2016 11:17:35 >> DeployAppTcpServer - Depl
 DEBUG: quarta-feira, 30 de novembro de 2016 11:17:36 >> RpcServiceDao - Database connected with success!
 INFO: sexta-feira, 9 de dezembro de 2016 16:10:42 >> DeployAppTcpServer - Deploy App TCP started on port: 40021
 DEBUG: sexta-feira, 9 de dezembro de 2016 16:10:44 >> RpcServiceDao - Database connected with success!
+INFO: quarta-feira, 4 de janeiro de 2017 18:19:28 >> DeployAppTcpServer - Deploy App TCP started on port: 40021
+DEBUG: quarta-feira, 4 de janeiro de 2017 18:19:30 >> RpcServiceDao - Database connected with success!
+INFO: quarta-feira, 4 de janeiro de 2017 22:51:56 >> DeployAppTcpServer - Deploy App TCP started on port: 40021
+DEBUG: quarta-feira, 4 de janeiro de 2017 22:51:57 >> RpcServiceDao - Database connected with success!
