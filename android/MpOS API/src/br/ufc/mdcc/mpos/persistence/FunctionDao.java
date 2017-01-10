@@ -12,13 +12,16 @@ import br.ufscar.mcc.model.ConnectionType;
 import br.ufscar.mcc.model.FunctionProfile;
 
 public class FunctionDao extends Dao {
-	private String TABLE_FUNCTION;
+	private String TABLE_LFUNCTION;
+	private String TABLE_RFUNCTION;
 	private String TABLE_METHOD;
 	private String F_ID = "functionid";
 	private String M_ID = "methodid";
 	private String M_NAME = "methodname";
 	private String M_COUNT = "methodcount";
 	private String M_HASH = "methodhash";
+	private String M_MIN = "methodmin";
+	private String M_MAX = "methodmax";
 	private String F_SERVERURL = "serverurl";
 	private String F_CONNTYPE = "conntype";
 	private String F_SUMX = "sumx";
@@ -31,16 +34,20 @@ public class FunctionDao extends Dao {
 
 	public FunctionDao(Context con) {
 		super(con);
-		TABLE_FUNCTION = con.getString(R.string.name_table_functiondata);
+		TABLE_LFUNCTION = con.getString(R.string.name_table_localfunctiondata);
+		TABLE_RFUNCTION = con.getString(R.string.name_table_remotefunctiondata);
 		TABLE_METHOD = con.getString(R.string.name_table_methoddata);
 	}
 
-	public void updateFunctionProfileList(HashMap<Integer, FunctionProfile> profileMap) {
+	public void updateFunctionProfileList(HashMap<Integer, FunctionProfile> localMap,
+			HashMap<Integer, FunctionProfile> remoteMap) {
 		ContentValues cv = new ContentValues();
 		String sql = "";
 		openDatabase();
 
-		for (FunctionProfile profile : profileMap.values()) {
+		for (FunctionProfile profile : localMap.values()) {
+			cv.put(M_MIN, profile.getMethodMin());
+			cv.put(M_MAX, profile.getMethodMax());
 			cv.put(F_SUMX, profile.getSumX());
 			cv.put(F_SUMY, profile.getSumY());
 			cv.put(F_SUMXY, profile.getSumXY());
@@ -51,7 +58,7 @@ public class FunctionDao extends Dao {
 				sql = "FUNCTIONID = " + profile.getFunctionId();
 
 				try {
-					database.update(TABLE_FUNCTION, cv, sql, null);
+					database.update(TABLE_LFUNCTION, cv, sql, null);
 				} catch (SQLException ex) {
 					Log.e(clsnama, ex.getMessage());
 				}
@@ -61,7 +68,39 @@ public class FunctionDao extends Dao {
 				cv.put(F_CONNTYPE, profile.getConnType().getValue());
 
 				try {
-					database.insert(TABLE_FUNCTION, null, cv);
+					database.insert(TABLE_LFUNCTION, null, cv);
+				} catch (SQLException ex) {
+					Log.e(clsnama, ex.getMessage());
+				}
+			}
+
+			cv.clear();
+		}
+
+		for (FunctionProfile profile : remoteMap.values()) {
+			cv.put(M_MIN, profile.getMethodMin());
+			cv.put(M_MAX, profile.getMethodMax());
+			cv.put(F_SUMX, profile.getSumX());
+			cv.put(F_SUMY, profile.getSumY());
+			cv.put(F_SUMXY, profile.getSumXY());
+			cv.put(F_SUMSQRX, profile.getSumSqrX());
+			cv.put(F_FACTORA, profile.getFactorA());
+			cv.put(F_FACTORB, profile.getFactorB());
+			if (profile.getFunctionId() > 0) {
+				sql = "FUNCTIONID = " + profile.getFunctionId();
+
+				try {
+					database.update(TABLE_RFUNCTION, cv, sql, null);
+				} catch (SQLException ex) {
+					Log.e(clsnama, ex.getMessage());
+				}
+			} else {
+				cv.put(M_ID, profile.getMethodId());
+				cv.put(F_SERVERURL, profile.getServerUrl());
+				cv.put(F_CONNTYPE, profile.getConnType().getValue());
+
+				try {
+					database.insert(TABLE_RFUNCTION, null, cv);
 				} catch (SQLException ex) {
 					Log.e(clsnama, ex.getMessage());
 				}
@@ -73,9 +112,18 @@ public class FunctionDao extends Dao {
 		closeDatabase();
 	}
 
-	public HashMap<Integer, FunctionProfile> getFunctionMapByServerConn(String serverUrl, ConnectionType connType) {
-		String sql = "SELECT F.FUNCTIONID, F.METHODID, M.METHODNAME, M.METHODCOUNT, M.METHODHASH, F.SERVERURL, F.CONNTYPE, "
-				+ "F.SUMX, F.SUMY, F.SUMXY, F.SUMSQRX, F.FACTORA, F.FACTORB FROM " + TABLE_FUNCTION + " F JOIN "
+	public HashMap<Integer, FunctionProfile> getLocalFunctionMapByServerConn() {
+		String sql = "SELECT F.FUNCTIONID, F.METHODID, M.METHODNAME, M.METHODHASH, F.METHODCOUNT, F.METHODMIN, F.METHODMAX, F.SERVERURL, F.CONNTYPE, "
+				+ "F.SUMX, F.SUMY, F.SUMXY, F.SUMSQRX, F.FACTORA, F.FACTORB FROM " + TABLE_LFUNCTION + " F JOIN "
+				+ TABLE_METHOD + " M ON M.METHODID = F.METHODID";
+
+		return getResultMap(sql);
+	}
+
+	public HashMap<Integer, FunctionProfile> getRemoteFunctionMapByServerConn(String serverUrl,
+			ConnectionType connType) {
+		String sql = "SELECT F.FUNCTIONID, F.METHODID, M.METHODNAME, M.METHODHASH, F.METHODCOUNT, F.METHODMIN, F.METHODMAX, F.SERVERURL, F.CONNTYPE, "
+				+ "F.SUMX, F.SUMY, F.SUMXY, F.SUMSQRX, F.FACTORA, F.FACTORB FROM " + TABLE_RFUNCTION + " F JOIN "
 				+ TABLE_METHOD + " M ON M.METHODID = F.METHODID WHERE F.SERVERURL LIKE '%" + serverUrl
 				+ "%' AND CONNTYPE = " + connType.getValue();
 
@@ -85,8 +133,8 @@ public class FunctionDao extends Dao {
 	private HashMap<Integer, FunctionProfile> getResultMap(String sql) {
 		HashMap<Integer, FunctionProfile> mapa = new HashMap<Integer, FunctionProfile>();
 		Cursor cursor;
-		int idx_functionid, idx_methodid, idx_methodname, idx_methodcount, idx_methodhash, idx_serverurl, idx_conntype,
-				idx_sumx, idx_sumy, idx_sumxy, idx_sumsqrx, idx_factora, idx_factorb;
+		int idx_functionid, idx_methodid, idx_methodname, idx_methodcount, idx_methodhash, idx_methodmin, idx_methodmax,
+				idx_serverurl, idx_conntype, idx_sumx, idx_sumy, idx_sumxy, idx_sumsqrx, idx_factora, idx_factorb;
 
 		openDatabase();
 		cursor = database.rawQuery(sql, null);
@@ -96,6 +144,8 @@ public class FunctionDao extends Dao {
 		idx_methodname = cursor.getColumnIndex(M_NAME);
 		idx_methodcount = cursor.getColumnIndex(M_COUNT);
 		idx_methodhash = cursor.getColumnIndex(M_HASH);
+		idx_methodmin = cursor.getColumnIndex(M_MIN);
+		idx_methodmax = cursor.getColumnIndex(M_MAX);
 		idx_serverurl = cursor.getColumnIndex(F_SERVERURL);
 		idx_conntype = cursor.getColumnIndex(F_CONNTYPE);
 		idx_sumx = cursor.getColumnIndex(F_SUMX);
@@ -114,6 +164,8 @@ public class FunctionDao extends Dao {
 				profile.setMethodName(cursor.getString(idx_methodname));
 				profile.setMethodCount(cursor.getInt(idx_methodcount));
 				profile.setMethodHash(cursor.getInt(idx_methodhash));
+				profile.setMethodMin(cursor.getInt(idx_methodmin));
+				profile.setMethodMax(cursor.getInt(idx_methodmax));
 				profile.setServerUrl(cursor.getString(idx_serverurl));
 				profile.setConnType(cursor.getInt(idx_conntype));
 				profile.setSumX(cursor.getInt(idx_sumx));

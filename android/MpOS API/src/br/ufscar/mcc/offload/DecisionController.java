@@ -7,9 +7,7 @@ import java.lang.reflect.Method;
 
 import android.content.Context;
 import android.util.Log;
-import br.ufscar.mcc.model.ConnectionType;
 import br.ufscar.mcc.model.ExecutionProfile;
-import br.ufscar.mcc.model.MethodProfile;
 
 public class DecisionController {
 	private static Layer01Stimulus layerStimulus;
@@ -18,7 +16,7 @@ public class DecisionController {
 	private final String clsName = DecisionController.class.getName();
 
 	public DecisionController(Context context) {
-		layerStimulus = new Layer01Stimulus(0.5);
+		layerStimulus = new Layer01Stimulus(3.0);
 		layerInteraction = new Layer02Interaction(context);
 		layerTime = new Layer03Time(context, 0);
 	}
@@ -50,6 +48,10 @@ public class DecisionController {
 			oos.flush();
 			returnSize = baos.toByteArray().length;
 			
+			paramSize /= 1024;
+			returnSize /= 1024;
+			executionTime /= 1000;
+			
 			layerTime.setExecutionProfile(method, paramSize, returnSize, (int)executionTime, layerInteraction.getServerUrl(), layerInteraction.getConnectionType(), decision);
 			
 		} catch (IOException e) {
@@ -67,14 +69,18 @@ public class DecisionController {
 			oos.flush();
 			returnSize = baos.toByteArray().length;
 			
-			layerTime.setExecutionProfile(method, paramSize, returnSize, (int)executionTime, layerInteraction.getServerUrl(), layerInteraction.getConnectionType(), DecisionFlag.ForcedLocal);
+			paramSize /= 1024;
+			returnSize /= 1024;
+			executionTime /= 1000;
 			
+			layerTime.setExecutionProfile(method, paramSize, returnSize, (int)executionTime, layerInteraction.getServerUrl(), layerInteraction.getConnectionType(), DecisionFlag.ForcedLocal);
+			layerStimulus.insertIntoLocalTable(method, paramSize, executionTime);
 		} catch (IOException e) {
 			Log.e(clsName, e.getMessage());
 		}
 	}
 	
-	public void setRemoteExecutionProfile(Method method, int paramSize, Object returnValue, long executionTime) {
+	public void setRemoteExecutionProfile(Method method, int paramSize, Object returnValue, long executionTime, long remoteTime) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		int returnSize;
 		try {
@@ -84,15 +90,21 @@ public class DecisionController {
 			oos.flush();
 			returnSize = baos.toByteArray().length;
 			
-			layerTime.setExecutionProfile(method, paramSize, returnSize, (int)executionTime, layerInteraction.getServerUrl(), layerInteraction.getConnectionType(), DecisionFlag.ForcedOffload);
+			paramSize /= 1024;
+			returnSize /= 1024;
 			
+			executionTime /= 1000;
+			remoteTime /= 1000;
+			
+			layerTime.setExecutionProfile(method, paramSize, returnSize, (int)executionTime, layerInteraction.getServerUrl(), layerInteraction.getConnectionType(), DecisionFlag.ForcedOffload);
+			layerStimulus.insertIntoRemoteTable(method, paramSize, remoteTime, layerInteraction.getServerUrl(), layerInteraction.getConnectionType());
 		} catch (IOException e) {
 			Log.e(clsName, e.getMessage());
 		}
 	}
 	
 	public void setExecutionProfile(Method method) {
-		layerTime.setMethodProfile(method, 1);
+		layerTime.setMethodProfile(method);
 	}
 
 	// --------------------------------
@@ -100,12 +112,20 @@ public class DecisionController {
 	// --------------------------------
 	public DecisionFlag makeDecision(Method method, int paramSize) {
 		DecisionFlag decision = DecisionFlag.GoOffload;
-		ExecutionProfile localProfile = layerTime.getLocalExecutionProfileByInput(method, paramSize);
-		ExecutionProfile remoteProfile = layerTime.getRemoteExecutionProfileByServerConn(method, paramSize,
-				layerInteraction.getServerUrl(), layerInteraction.getConnectionType());
-		
-		decision = layerInteraction.makeDecision(localProfile, remoteProfile);
+		paramSize /= 1024;
+		decision = layerStimulus.makeDecision(method, paramSize);
 
+		if(decision == DecisionFlag.NoDecision)
+		{
+			ExecutionProfile localProfile = layerTime.getLocalExecutionProfileByInput(method, paramSize);
+			ExecutionProfile remoteProfile = layerTime.getRemoteExecutionProfileByServerConn(method, paramSize,
+					layerInteraction.getServerUrl(), layerInteraction.getConnectionType());
+			decision = layerInteraction.makeDecision(localProfile, remoteProfile);
+			Log.i(clsName, "Camada de interacao tomou decisao.");
+		}
+		else
+			Log.i(clsName, "Camada de estimulo tomou decisao.");
+		
 		switch (decision) {
 		case ForcedLocal:
 			Log.i(clsName, "Decision for method " + method.getName() + ": forced local execution.");

@@ -1,7 +1,5 @@
 package br.ufc.mdcc.mpos.persistence;
 
-import java.lang.reflect.Method;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -15,7 +13,6 @@ public class MethodDao extends Dao {
 	private String L_ID = "methodid";
 	private String L_METHODNAME = "methodname";
 	private String L_CLASSNAME = "classname";
-	private String L_METHODCOUNT = "methodcount";
 	private String L_METHODHASH = "methodhash";
 	private final String clsname = MethodDao.class.getName();
 
@@ -41,25 +38,8 @@ public class MethodDao extends Dao {
 		closeDatabase();
 	}
 
-	public void updateMethodProfile(int methodId, int methodCount) {
-		openDatabase();
-
-		ContentValues cv = new ContentValues();
-		cv.put(L_METHODCOUNT, methodCount);
-
-		String sql = "METHODID = " + methodId;
-
-		try {
-			database.update(TABLE_NAME, cv, sql, null);
-		} catch (SQLException ex) {
-			Log.e(clsname, ex.getMessage());
-		}
-
-		closeDatabase();
-	}
-
 	public MethodProfile getMethodProfle(String methodName, String className) {
-		String sql = "SELECT METHODID, METHODNAME, CLASSNAME, METHODCOUNT FROM " + TABLE_NAME
+		String sql = "SELECT METHODID, METHODNAME, CLASSNAME FROM " + TABLE_NAME
 				+ " WHERE METHODNAME LIKE '%" + methodName + "%' AND CLASSNAME LIKE '%" + className + "%'";
 
 		return getResult(sql);
@@ -76,13 +56,11 @@ public class MethodDao extends Dao {
 		int idx_logid = cursor.getColumnIndex(L_ID);
 		int idx_methodname = cursor.getColumnIndex(L_METHODNAME);
 		int idx_classname = cursor.getColumnIndex(L_CLASSNAME);
-		int idx_methodcount = cursor.getColumnIndex(L_METHODCOUNT);
 
 		if (cursor != null && cursor.moveToFirst()) {
 			profile.setMethodId(cursor.getInt(idx_logid));
 			profile.setMethodName(cursor.getString(idx_methodname));
 			profile.setClassName(cursor.getString(idx_classname));
-			profile.setMethodCount(cursor.getInt(idx_methodcount));
 			
 			Log.i(clsname, "Achado metodo "+profile.getMethodName());
 		}

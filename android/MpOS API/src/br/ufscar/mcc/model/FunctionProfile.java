@@ -1,11 +1,15 @@
 package br.ufscar.mcc.model;
 
+import android.util.Log;
+
 public class FunctionProfile {
 	private int functionId;
 	private int methodId;
 	private String methodName;
 	private int methodCount;
 	private int methodHash;
+	private int methodMin;
+	private int methodMax;
 	private String serverUrl;
 	private ConnectionType connType;
 	private int sumX;
@@ -14,12 +18,22 @@ public class FunctionProfile {
 	private int sumSqrX;
 	private double factorA;
 	private double factorB;
+	private String clsName = FunctionProfile.class.getName();
 
 	public FunctionProfile() {
 		functionId = 0;
 		methodId = 0;
 		methodName = "";
+		methodCount = 0;
+		methodMin = 0;
+		methodMax = 0;
 		serverUrl = "";
+		sumX = 0;
+		sumSqrX = 0;
+		sumY = 0;
+		sumXY = 0;
+		factorA = 0.0;
+		factorB = 0.0;
 	}
 
 	public int getFunctionId() {
@@ -60,6 +74,22 @@ public class FunctionProfile {
 
 	public void setMethodHash(int methodHash) {
 		this.methodHash = methodHash;
+	}
+
+	public int getMethodMin() {
+		return methodMin;
+	}
+
+	public void setMethodMin(int methodMin) {
+		this.methodMin = methodMin;
+	}
+
+	public int getMethodMax() {
+		return methodMax;
+	}
+
+	public void setMethodMax(int methodMax) {
+		this.methodMax = methodMax;
 	}
 
 	public String getServerUrl() {
@@ -133,5 +163,36 @@ public class FunctionProfile {
 
 	public void setFactorB(double factorB) {
 		this.factorB = factorB;
+	}
+
+	public void updateValues(int valueX, int valueY) {
+		int upSide, downSide;
+
+		if (valueX < methodMin)
+			methodMin = valueX;
+		if (valueX > methodMax)
+			methodMax = valueX;
+
+		// Atualização das somatórias a serem utilizadas no cálculo dos fatores
+		sumX += valueX;
+		sumSqrX += valueX * valueX;
+		sumY += valueY;
+		sumXY += valueX * valueY;
+		methodCount += 1;
+
+		// Cálculo dos fatores para função seguindo método dos mínimos quadrados
+		upSide = (methodCount * sumXY) - (sumX * sumY);
+		downSide = (methodCount * sumSqrX) - (sumX * sumX);
+		if (upSide == downSide)
+			factorA = 1.0;
+		else if (downSide == 0)
+			factorA = 1000.0;
+		else
+			factorA = (double)upSide / (double)downSide;
+
+		factorB = ((double)sumY / (double)methodCount) - ((double)sumX * factorA / (double)methodCount);
+
+		Log.i(clsName, "X: " + sumX + ", X^2: " + sumSqrX + ", XY: " + sumXY + ", Y: " + sumY + ", A: " + factorA
+				+ ", B: " + factorB + ", nro de chamadas: " + methodCount);
 	}
 }

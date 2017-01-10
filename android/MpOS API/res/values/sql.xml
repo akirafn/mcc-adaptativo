@@ -10,7 +10,7 @@
     <string name="drop_table_user">DROP TABLE IF EXISTS user</string>
     <string name="name_table_user">user</string>
     
-    <string name="create_table_methoddata">CREATE TABLE t_methoddata (methodid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodname TEXT, classname TEXT, methodcount INTEGER DEFAULT 1, methodhash INTEGER)</string>
+    <string name="create_table_methoddata">CREATE TABLE t_methoddata (methodid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodname TEXT, classname TEXT, methodhash INTEGER)</string>
     <string name="drop_table_methoddata">DROP TABLE IF EXISTS t_methoddata</string>
     <string name="name_table_methoddata">t_methoddata</string>
     
@@ -22,11 +22,11 @@
     <string name="drop_table_remoteexecutiondata">DROP TABLE IF EXISTS t_remoteexecutiondata</string>
     <string name="name_table_remoteexecutiondata">t_remoteexecutiondata</string>
     
-    <string name="create_table_thresholddata">CREATE TABLE t_thresholddata ( thresholdid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodid INTEGER, serverurl TEXT, conntype INTEGER, unfavmin INTEGER, unfavmax INTEGER, favmin INTEGER, favmax INTEGER)</string>
-    <string name="drop_table_thresholddata">DROP TABLE IF EXISTS t_thresholddata</string>
-    <string name="name_table_thresholddata">t_thresholddata</string>    
+    <string name="create_table_localfunctiondata">CREATE TABLE t_localfunctiondata (functionid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodid INTEGER, methodcount INTEGER, methodmax INTEGER, methodmin INTEGER, serverurl TEXT, conntype INTEGER, sumx INTEGER, sumy INTEGER, sumxy INTEGER, sumsqrx INTEGER, factora REAL, factorb REAL)</string>
+    <string name="drop_table_localfunctiondata">DROP TABLE IF EXISTS t_localfunctiondata</string>
+    <string name="name_table_localfunctiondata">t_localfunctiondata</string>
     
-    <string name="create_table_functiondata">CREATE TABLE t_functiondata (functionid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodid INTEGER, serverurl TEXT, conntype INTEGER, sumx INTEGER, sumy INTEGER, sumxy INTEGER, sumsqrx INTEGER, factora REAL, factorb REAL)</string>
-    <string name="drop_table_functiondata">DROP TABLE IF EXISTS t_functiondata</string>
-    <string name="name_table_functiondata">t_functiondata</string>
+    <string name="create_table_remotefunctiondata">CREATE TABLE t_remotefunctiondata (functionid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, methodid INTEGER, methodcount INTEGER, methodmax INTEGER, methodmin INTEGER, serverurl TEXT, conntype INTEGER, sumx INTEGER, sumy INTEGER, sumxy INTEGER, sumsqrx INTEGER, factora REAL, factorb REAL)</string>
+    <string name="drop_table_remotefunctiondata">DROP TABLE IF EXISTS t_remotefunctiondata</string>
+    <string name="name_table_remotefunctiondata">t_remotefunctiondata</string>
 </resources>

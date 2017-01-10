@@ -133,6 +133,7 @@ public final class ProxyHandler implements InvocationHandler {
 
 	private Object invokeRemotable(ServerContent server, boolean needProfile, Method method, Object params[], int paramSize) throws RpcException, ConnectException {
 		rpc.setupServer(server);
+		long initCpu = System.currentTimeMillis();
 		ResponseRemotable response = rpc.call(needProfile, manualSerialization, objOriginal, method.getName(), params);
 		
 		if (needProfile) {
@@ -140,9 +141,10 @@ public final class ProxyHandler implements InvocationHandler {
 			Log.i(clsName, profile.toString());
 			MposFramework.getInstance().getEndpointController().rpcProfile = profile;
 		}
+		long remoteTime = System.currentTimeMillis() - initCpu;
 
 		if (response != null) {
-			MposFramework.getInstance().getDecisionController().setRemoteExecutionProfile(method, paramSize, response.methodReturn, response.executionTime);
+			MposFramework.getInstance().getDecisionController().setRemoteExecutionProfile(method, paramSize, response.methodReturn, response.executionTime, remoteTime);
 
 			return response.methodReturn;
 		} else {

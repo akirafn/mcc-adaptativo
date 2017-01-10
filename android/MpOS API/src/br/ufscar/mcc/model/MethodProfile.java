@@ -5,23 +5,18 @@ public class MethodProfile {
 	private int methodId;
 	private String methodName;
 	private String className;
-	private int methodCount;
 	
 	public MethodProfile() {
 		methodId = 0;
-		methodCount = 0;
 	}
-
 
 	public int getMethodId() {
 		return methodId;
 	}
 
-
 	public void setMethodId(int methodId) {
 		this.methodId = methodId;
 	}
-
 
 	public String getMethodName() {
 		return methodName;
@@ -31,24 +26,12 @@ public class MethodProfile {
 		this.methodName = methodName;
 	}
 
-
 	public String getClassName() {
 		return className;
 	}
 
-
 	public void setClassName(String className) {
 		this.className = className;
-	}
-
-
-	public int getMethodCount() {
-		return methodCount;
-	}
-
-
-	public void setMethodCount(int methodCount) {
-		this.methodCount = methodCount;
 	}
 
 	@Override

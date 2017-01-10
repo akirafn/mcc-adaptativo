@@ -38,11 +38,10 @@ public class Layer03Time {
 		return profile;
 	}
 
-	public void setMethodProfile(Method method, int methodCount) {
+	public void setMethodProfile(Method method) {
 		MethodProfile profile = new MethodProfile();
 		profile.setMethodName(method.getName());
 		profile.setClassName(method.getClass().getName());
-		profile.setMethodCount(methodCount);
 
 		try {
 			methodDao.insertMethodProfile(profile);
@@ -108,7 +107,6 @@ public class Layer03Time {
 			if (mtProfile.getMethodId() == 0) {
 				mtProfile.setMethodName(method.getName());
 				mtProfile.setClassName(method.getClass().getName());
-				mtProfile.setMethodCount(1);
 				methodDao.insertMethodProfile(mtProfile);
 				Log.i(clsName,
 						"Inserido método " + mtProfile.getMethodName() + " da classe " + mtProfile.getClassName());
@@ -122,12 +120,12 @@ public class Layer03Time {
 			Log.e(clsName, ex.getMessage());
 		}
 	}
-
-	public HashMap<Integer, FunctionProfile> getFunctionMap(String serverUrl, ConnectionType connType) {
+	
+	public HashMap<Integer, FunctionProfile> getLocalFunctionMap() {
 		HashMap<Integer, FunctionProfile> mapa;
 
 		try {
-			mapa = functionDao.getFunctionMapByServerConn(serverUrl, connType);
+			mapa = functionDao.getLocalFunctionMapByServerConn();
 		} catch (Exception ex) {
 			Log.e(clsName, ex.getMessage());
 			mapa = new HashMap<Integer, FunctionProfile>();
@@ -136,9 +134,22 @@ public class Layer03Time {
 		return mapa;
 	}
 
-	public void updateFunctionMap(HashMap<Integer, FunctionProfile> mapa) {
+	public HashMap<Integer, FunctionProfile> getRemoteFunctionMap(String serverUrl, ConnectionType connType) {
+		HashMap<Integer, FunctionProfile> mapa;
+
 		try {
-			functionDao.updateFunctionProfileList(mapa);
+			mapa = functionDao.getRemoteFunctionMapByServerConn(serverUrl, connType);
+		} catch (Exception ex) {
+			Log.e(clsName, ex.getMessage());
+			mapa = new HashMap<Integer, FunctionProfile>();
+		}
+
+		return mapa;
+	}
+
+	public void updateFunctionMap(HashMap<Integer, FunctionProfile> localMap, HashMap<Integer, FunctionProfile> remoteMap) {
+		try {
+			functionDao.updateFunctionProfileList(localMap, remoteMap);
 		} catch (Exception ex) {
 			Log.e(clsName, ex.getMessage());
 		}

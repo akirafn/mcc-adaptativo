@@ -62,30 +62,30 @@ public final class R {
         public static final int but_inicia=0x7f040019;
         public static final int button_cancel=0x7f04001d;
         public static final int button_ok=0x7f04001c;
-        public static final int create_table_functiondata=0x7f040013;
         public static final int create_table_localexecutiondata=0x7f04000a;
+        public static final int create_table_localfunctiondata=0x7f040010;
         public static final int create_table_methoddata=0x7f040007;
         public static final int create_table_netprofile=0x7f040001;
         public static final int create_table_remoteexecutiondata=0x7f04000d;
-        public static final int create_table_thresholddata=0x7f040010;
+        public static final int create_table_remotefunctiondata=0x7f040013;
         public static final int create_table_user=0x7f040004;
         public static final int database_name=0x7f040000;
-        public static final int drop_table_functiondata=0x7f040014;
         public static final int drop_table_localexecutiondata=0x7f04000b;
+        public static final int drop_table_localfunctiondata=0x7f040011;
         public static final int drop_table_methoddata=0x7f040008;
         public static final int drop_table_netprofile=0x7f040002;
         public static final int drop_table_remoteexecutiondata=0x7f04000e;
-        public static final int drop_table_thresholddata=0x7f040011;
+        public static final int drop_table_remotefunctiondata=0x7f040014;
         public static final int drop_table_user=0x7f040005;
         public static final int hello_world=0x7f040018;
         public static final int menu_act_cloudlet=0x7f04001a;
         public static final int menu_act_export=0x7f04001b;
-        public static final int name_table_functiondata=0x7f040015;
         public static final int name_table_localexecutiondata=0x7f04000c;
+        public static final int name_table_localfunctiondata=0x7f040012;
         public static final int name_table_methoddata=0x7f040009;
         public static final int name_table_netprofile=0x7f040003;
         public static final int name_table_remoteexecutiondata=0x7f04000f;
-        public static final int name_table_thresholddata=0x7f040012;
+        public static final int name_table_remotefunctiondata=0x7f040015;
         public static final int name_table_user=0x7f040006;
     }
     public static final class style {

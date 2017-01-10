@@ -59,7 +59,8 @@ final class DatabaseManager extends SQLiteOpenHelper {
 		if (oldVersion != newVersion) {
 			db.execSQL(context.getString(R.string.drop_table_netprofile));
 			db.execSQL(context.getString(R.string.drop_table_user));
-			db.execSQL(context.getString(R.string.drop_table_functiondata));
+			db.execSQL(context.getString(R.string.drop_table_remotefunctiondata));
+			db.execSQL(context.getString(R.string.drop_table_localfunctiondata));
 			db.execSQL(context.getString(R.string.drop_table_localexecutiondata));
 			db.execSQL(context.getString(R.string.drop_table_remoteexecutiondata));
 			db.execSQL(context.getString(R.string.drop_table_methoddata));
@@ -73,6 +74,7 @@ final class DatabaseManager extends SQLiteOpenHelper {
 		tabelas.add(context.getString(R.string.create_table_methoddata));
 		tabelas.add(context.getString(R.string.create_table_localexecutiondata));
 		tabelas.add(context.getString(R.string.create_table_remoteexecutiondata));
-		tabelas.add(context.getString(R.string.create_table_functiondata));
+		tabelas.add(context.getString(R.string.create_table_localfunctiondata));
+		tabelas.add(context.getString(R.string.create_table_remotefunctiondata));
 	}
 }
