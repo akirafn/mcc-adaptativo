@@ -181,8 +181,8 @@ public class FunctionProfile {
 		methodCount += 1;
 
 		// Cálculo dos fatores para função seguindo método dos mínimos quadrados
-		upSide = (methodCount * sumXY) - (sumX * sumY);
-		downSide = (methodCount * sumSqrX) - (sumX * sumX);
+		downSide = (methodCount * sumXY) - (sumX * sumY);
+		upSide = (methodCount * sumSqrX) - (sumX * sumX);
 		if (upSide == downSide)
 			factorA = 1.0;
 		else if (downSide == 0)
@@ -190,7 +190,8 @@ public class FunctionProfile {
 		else
 			factorA = (double)upSide / (double)downSide;
 
-		factorB = ((double)sumY / (double)methodCount) - ((double)sumX * factorA / (double)methodCount);
+		factorB = (double)sumY - ((double)sumX / factorA);
+		factorB /= (double)methodCount;
 
 		Log.i(clsName, "X: " + sumX + ", X^2: " + sumSqrX + ", XY: " + sumXY + ", Y: " + sumY + ", A: " + factorA
 				+ ", B: " + factorB + ", nro de chamadas: " + methodCount);

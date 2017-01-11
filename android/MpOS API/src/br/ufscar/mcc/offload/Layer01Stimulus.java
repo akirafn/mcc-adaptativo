@@ -47,8 +47,8 @@ public class Layer01Stimulus {
 			localProfile = localMap.get(chave);
 			if (localProfile.getMethodName().equals(method.getName())) {
 				if (inputSize <= localProfile.getMethodMax() && inputSize >= localProfile.getMethodMin()) {
-					localValue = (localProfile.getFactorA() * (double) inputSize) + localProfile.getFactorB();
-					Log.i(clsName, "Execucao local: " + localProfile.getFactorA() + "*" + inputSize + " + "
+					localValue = ((double) inputSize / localProfile.getFactorA()) + localProfile.getFactorB();
+					Log.i(clsName, "Execucao local: " + inputSize + "/" + localProfile.getFactorA() + " + "
 							+ localProfile.getFactorB() + " = " + localValue);
 				} else
 					Log.i(clsName, "Execucao local: input " + inputSize + " fora do alcance ["
@@ -62,8 +62,8 @@ public class Layer01Stimulus {
 			remoteProfile = remoteMap.get(chave);
 			if (remoteProfile.getMethodName().equals(method.getName())) {
 				if (inputSize <= remoteProfile.getMethodMax() && inputSize >= remoteProfile.getMethodMin()) {
-					remoteValue = (remoteProfile.getFactorA() * (double) inputSize) + remoteProfile.getFactorB();
-					Log.i(clsName, "Execucao remota: " + remoteProfile.getFactorA() + "*" + inputSize + " + "
+					remoteValue = ((double) inputSize / remoteProfile.getFactorA()) + remoteProfile.getFactorB();
+					Log.i(clsName, "Execucao remota: " + inputSize + "/" + remoteProfile.getFactorA() + " + "
 							+ remoteProfile.getFactorB() + " = " + remoteValue);
 				} else
 					Log.i(clsName, "Execucao remota: input " + inputSize + " fora do alcance ["

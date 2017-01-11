@@ -741,3 +741,35 @@ INFO : 2017-01-10 19:06:02 >> BandwidthTcpServer:99 - >> Terminou operacao de up
 INFO : 2017-01-10 19:06:26 >> BandwidthTcpServer:76 - >> Terminou operacao de download
 INFO : 2017-01-10 19:06:58 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
 INFO : 2017-01-10 19:07:09 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2017-01-11 00:17:38 >> PingTcpServer:41 - Echo TCP started on port: 40000
+INFO : 2017-01-11 00:17:38 >> DiscoveryServiceTcpServer:41 - Discovery Service TCP started on port: 30015
+INFO : 2017-01-11 00:17:38 >> DiscoveryMulticastService:47 - Discovery Cloudlet Multicast started on port: 31000
+INFO : 2017-01-11 00:17:38 >> RpcTcpServer:51 - Service: benchimage_2.0.28072014v, was started on port: 36836
+INFO : 2017-01-11 00:17:38 >> DeployAppTcpServer:41 - Deploy App TCP started on port: 40020
+INFO : 2017-01-11 00:17:38 >> PersistenceTcpServer:41 - Persistence TCP started on port: 40011
+INFO : 2017-01-11 00:17:38 >> BandwidthTcpServer:41 - Bandwidth TCP started on port: 40010
+INFO : 2017-01-11 00:17:38 >> JitterRetrieveTcpServer:41 - Jitter Retrieve TCP started on port: 40006
+INFO : 2017-01-11 00:17:38 >> JitterUdpServer:43 - Jitter UDP started on port: 40005
+INFO : 2017-01-11 00:17:38 >> PingUdpServer:47 - Echo UDP started on port: 40001
+INFO : 2017-01-11 00:18:56 >> DiscoveryMulticastService:62 - Receive request from: /192.168.0.101:31000
+INFO : 2017-01-11 00:19:06 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2017-01-11 00:19:18 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2017-01-11 00:19:41 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2017-01-11 00:19:53 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2017-01-11 00:20:16 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2017-01-11 00:20:28 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2017-01-11 00:20:51 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2017-01-11 00:21:03 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2017-01-11 00:21:26 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2017-01-11 00:21:38 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2017-01-11 00:22:01 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2017-01-11 00:22:14 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2017-01-11 00:22:36 >> BandwidthTcpServer:76 - >> Terminou operacao de download
+INFO : 2017-01-11 00:22:48 >> BandwidthTcpServer:99 - >> Terminou operacao de upload
+INFO : 2017-01-11 00:23:10 >> BandwidthTcpServer:58 - Any problem with I/O socket
+java.net.SocketException: Connection reset by peer: socket write error
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(Unknown Source)
+	at java.net.SocketOutputStream.write(Unknown Source)
+	at br.ufc.mdcc.mpos.net.profile.BandwidthTcpServer.clientRequest(BandwidthTcpServer.java:71)
+	at br.ufc.mdcc.mpos.net.TcpServer$1.run(TcpServer.java:53)
